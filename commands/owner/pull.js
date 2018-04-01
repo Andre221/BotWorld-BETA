@@ -6,7 +6,7 @@ module.exports.run = function (command, args, message, bot) {
         require('child_process').exec('cd /app/ && git pull origin master', (error, out) => {
             message.channel.send('```' + out + '```').then((msg) => {
                 require('child_process').exec('refresh', (err, out) => {});
-            })
+            });
         });
     }else{
         message.reply('You don\'t own me!');
