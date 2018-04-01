@@ -4,7 +4,7 @@ const Discord = require('discord.js');
 module.exports.run = function (command, args, message, bot) {
     if(message.author.id == '292377829105205249') {
         require('child_process').exec('cd /app/ && git pull origin master && refesh', (error, out) => {
-            message.channel.send('yes!');
+            console.log('no')
             message.channel.send('```' + out + '```');
         });
     }else{
