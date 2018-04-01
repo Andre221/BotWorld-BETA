@@ -70,7 +70,7 @@ app.get('/stats/js', (req, res) => {
     res.sendFile(process.cwd() + '/web/htmlCss/stats/index.js');
 });
 
-app.listen(1111);
+app.listen(process.env.PORT);
 
 module.exports = function(client){
     bot = client;
