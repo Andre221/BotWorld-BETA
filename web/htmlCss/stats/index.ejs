@@ -1,0 +1,17 @@
+<html>
+    <head>
+        <title>Stats</title>
+        <link rel="stylesheet" href="/stats/styles">
+    </head>
+    <body style="transform: perspective(1200px);">
+        <p id="guild-count">Guild Count: <%= guildCount %></p>
+        <p id="uptime">Uptime: <%= uptime %></p>
+        <p id="ping">Ping <%= ping %>ms</p>
+        <p id="user-count">Users: <%= userCount %>ms</p>
+        <p></p>
+        <p id="message-user">User Messages: <%= messages.user %></p>
+        <p id="message-bot">Bot Messages: <%= messages.bot %></p>
+        <p id="message-self">Self Messages: <%= messages.self %></p>
+    </body>
+    <script src="/stats/js"></script>
+</html>

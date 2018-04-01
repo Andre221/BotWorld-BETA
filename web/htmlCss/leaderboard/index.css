@@ -1,0 +1,60 @@
+body{
+    background-image: url("http://a1star.com/images/star--background-seamless-repeating9.jpg");
+    background-repeat: repeat;
+}
+
+.user-name{
+    color: black;
+    position: relative;
+    left: -150px;
+    top: 20px;
+}
+
+.user-balance{
+    color: black;
+    position: relative;
+    left: -150px;
+    top: 50px;
+}
+
+.user-avatar{
+    border-radius: 50%;
+    position: relative;
+    left: 150px;
+    top: -50px;
+}
+
+.user-object{
+    border-radius: 25px;
+    background-image: url("http://www.destinationlangues.com/site/wp-content/themes/hipster-new/assets/images/background/light/grilled.png");
+    background-repeat: repeat;
+    opacity: 0.9;
+    width: 500px;
+    margin: 50px;
+}
+
+.user-object:hover{
+    opacity: 1;
+    transition: ease 0.25s;
+}
+
+.note{
+    font-size: 10pt;
+    position: relative;
+    top: -10px;
+}
+
+#guild-icon{
+    border: 5px solid white;
+    border-radius: 50%;
+}
+
+#guild-name{
+    color: white;
+    font-size: 50pt;
+}
+
+#users-count{
+    color: white;
+    font-size: 17.5pt;
+}

@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <!--Define title + meta stuff-->
+    <title>Balances - <%= guild.name %></title>
+    <link rel="shortcut icon" href="<%= guild.iconURL %>">
+    <!--Links-->
+    <link rel="stylesheet" href="/leaderstyles">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+</head>
+<body>
+    <div id="guild-info" align="center">
+        <h5 id="guild-name">Leaderboard: <%= guild.name %></h5>
+        <p id="users-count">Showing <%= memberData.length %> users with balances out of the <%= guild.members.filter(member => member.user.bot==false).size %> total members</p>
+        <img id="guild-icon" src="<%= guild.iconURL %>">
+    </div>
+    <div id="leaders" align="center">
+        <% for(var i=0; i<memberData.length;i++){ %>
+        <header class="user-object">
+            <p class="user-name"><%= (i + 1).toLocaleString() %>. <%= memberData[i].tag %>:</p>
+            <p class="user-balance">Balance: $<%= memberData[i].balance.toLocaleString() %></p>
+            <img class="user-avatar" style="opacity: 1;" src="<%= memberData[i].avatar%>">
+            <p class="note">(ID: <%= memberData[i].id %>) Fetched through BotWorld#1500</p>
+        </header>
+        <% } %>
+    </div>
+</body>
+</html>
