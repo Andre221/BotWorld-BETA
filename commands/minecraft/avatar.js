@@ -27,6 +27,6 @@ module.exports.help = {
     name: 'mcavatar',
     aliases: [],
     usage: '{*}mcavatar <username>',
-    type: 'games=>minecraft',
+    type: 'games=>test=>minecraft',
     description: 'Get a users avatar.'
 }

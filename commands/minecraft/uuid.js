@@ -27,6 +27,6 @@ module.exports.help = {
     name: 'mcid',
     aliases: ['mcuuid'],
     usage: '{*}mcid <username>',
-    type: 'games=>minecraft',
+    type: 'games=>test=>minecraft',
     description: 'Get a users UUID'
 }
