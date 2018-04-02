@@ -151,17 +151,17 @@ bot.on('message', (message) => {
         let prefixes = ['bb-', '<@' + bot.user.id + '> '];
 
         prefixes.forEach(prefix => {
-            if(message.content.substring(0, prefix.length)!=prefix) return;
-    
-            let args = message.content.split(' ');
-            let command = args[0].substring(prefix.length);
-            args.shift();
-        
-            bot.commands.forEach(cmd => {
-                if(cmd.help.name==command.toLowerCase() || cmd.help.aliases.includes(command.toLowerCase())){
-                    cmd.run(command, args, message, bot);
-                }
-            });
+            if(message.content.substring(0, prefix.length)==prefix){
+                let args = message.content.split(' ');
+                let command = args[0].substring(prefix.length);
+                args.shift();
+            
+                bot.commands.forEach(cmd => {
+                    if(cmd.help.name==command.toLowerCase() || cmd.help.aliases.includes(command.toLowerCase())){
+                        cmd.run(command, args, message, bot);
+                    }
+                });
+            }
         });
     }catch(err){
         message.channel.send('Missing permissions or errored!: ' + err).catch(er2 => {message.channel.send(er2)});
