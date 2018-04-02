@@ -27,6 +27,6 @@ module.exports.help = {
     name: 'mcskin',
     aliases: [],
     usage: '{*}mcskin <username>',
-    type: 'minecraft',
+    type: 'games=>minecraft',
     description: 'Get a users skin.'
 }

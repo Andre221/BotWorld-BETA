@@ -24,6 +24,7 @@
     "opusscript": "0.0.6",
     "vhost": "^3.0.2",
     "youtube-search": "^1.1.0",
-    "ytdl-core": "^0.20.2"
+    "ytdl-core": "^0.20.2",
+    "canvas": "^1.6.10"
   }
 }

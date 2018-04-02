@@ -27,6 +27,6 @@ module.exports.help = {
     name: 'mchead',
     aliases: [],
     usage: '{*}mchead <username>',
-    type: 'minecraft',
+    type: 'games=>minecraft',
     description: 'Get a users head.'
 }

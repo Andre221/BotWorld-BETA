@@ -9,16 +9,40 @@ module.exports.run = function(command, args, message, bot){
     });
 
     if(args[0] && sections.includes(args[0].toLowerCase())){
-        let helpEmbed = new Discord.RichEmbed()
-        .setColor('#AABBED')
-        .setTitle('Help | ' + args[0])
-        .setDescription('List of commands:');
+        let sub = false;
         bot.commands.forEach(cmd => {
-            if(args[0].toLowerCase()==cmd.help.type){
-                helpEmbed.addField(cmd.help.usage.replace('{*}', 'bb-'), cmd.help.description);
+            if(cmd.help.type.split('=>')[0] == args[0].toLowerCase() && cmd.help.type.split('=>').length >1){
+                sub = true;
             }
         });
-        message.channel.send(helpEmbed);
+        if(!sub){
+            let helpEmbed = new Discord.RichEmbed()
+            .setColor('#AABBED')
+            .setTitle('Help | ' + args[0])
+            .setDescription('List of commands:');
+            bot.commands.forEach(cmd => {
+                if(args[0].toLowerCase()==cmd.help.type){
+                    helpEmbed.addField(cmd.help.usage.replace('{*}', 'bb-'), cmd.help.description);
+                }
+            });
+            message.channel.send(helpEmbed);
+        }else{
+            let subs = [];
+            bot.commands.forEach(cmd => {
+                if(cmd.help.type.split('=>')[0] == args[0].toLowerCase() && cmd.help.type.split('=>').length >1){
+                    if(!subs.includes(cmd.help.type.split('=>')[1])) subs[subs.length] = cmd.help.type.split('=>')[1];
+                }
+            });
+
+            let helpEmbed = new Discord.RichEmbed()
+            .setColor('#AABBED')
+            .setTitle('Help | Sections of ' + args[0].toLowerCase())
+            .setDescription('List of sections:');
+            sebs.forEach(section => {
+                helpEmbed.addField(section, 'bb-help ' + section);
+            });
+            message.channel.send(helpEmbed);
+        }
     }else{
         let helpEmbed = new Discord.RichEmbed()
         .setColor('#AABBED')
