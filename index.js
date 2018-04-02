@@ -153,7 +153,7 @@ bot.on('message', (message) => {
         prefixes.forEach(prefix => {
             if(message.content.substring(0, prefix.length)==prefix){
                 let args = message.content.substr(prefix.length).split(' ');
-                let command = args[0].substring(prefix.length);
+                let command = args[0];
                 args.shift();
             
                 bot.commands.forEach(cmd => {
