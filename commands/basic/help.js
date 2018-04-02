@@ -4,8 +4,11 @@ module.exports.run = function(command, args, message, bot){
     let sections = [];
     bot.commands.forEach(cmd => {
         if(!sections.includes(cmd.help.type.split('=>')[0])){
-            sections[sections.length] = cmd.help.type.split('=>')[0];
-            if(cmd.help.type.split('=>').length>1 && !sections.includes(cmd.help.type.split('=>')[1])) sections[sections.length] = cmd.help.type.split('=>')[1];
+            if(cmd.help.type.split('=>').length>1 && !sections.includes(cmd.help.type.split('=>')[1])){
+                sections[sections.length] = cmd.help.type.split('=>')[1]
+            }else{
+                sections[sections.length] = cmd.help.type.split('=>')[0];
+            }
         }
     });
 
@@ -39,7 +42,7 @@ module.exports.run = function(command, args, message, bot){
             .setColor('#AABBED')
             .setTitle('Help | Sections of ' + args[0].toLowerCase())
             .setDescription('List of sections:');
-            sebs.forEach(section => {
+            subs.forEach(section => {
                 helpEmbed.addField(section, 'bb-help ' + section);
             });
             message.channel.send(helpEmbed);
