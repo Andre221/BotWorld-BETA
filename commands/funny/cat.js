@@ -6,10 +6,10 @@ module.exports.run = function(command, args, message, bot){
 }
 
 module.exports.help = {
-    name: 'why',
+    name: 'cat',
     aliases: ['?'],
-    usage: '{*}why',
+    usage: '{*}cat',
     type: 'funny',
-    description: 'Why???'
+    description: 'Get a cat!'
 }
 
