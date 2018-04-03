@@ -9,7 +9,7 @@ module.exports.run = function (command, args, message, bot) {
         hl: 'en-us',
         ssl: true,
         callback: function (error, content) {
-            message.guild.voiceConnection.playStream(content);
+            message.guild.voiceConnection.playFile(content);
         }
     });
 }
