@@ -14,6 +14,50 @@ bot.commands = new Discord.Collection();
 
 let logger = new Discord.WebhookClient(process.env.LOGGER_ID, process.env.LOGGER_TOKEN);
 
+bot.on('guildCreate', (guild) => {
+    let bots = 0;
+    let users = 0;
+
+    guild.members.forEach(mem => {
+        if(mem.user.bot){
+            bots++;
+        }else{
+            users++;
+        }
+    });
+
+    let embed = new Discord.RichEmbed()
+    .setColor('#AABBED')
+    .setTitle('Joined guild!')
+    .addField('Name:', guild.name)
+    .addField('Bots:', bots)
+    .addField('Users', users)
+    .setTimestamp();
+    logger.send(embed);
+});
+
+bot.on('guildDelete', (guild) => {
+    let bots = 0;
+    let users = 0;
+
+    guild.members.forEach(mem => {
+        if(mem.user.bot){
+            bots++;
+        }else{
+            users++;
+        }
+    });
+
+    let embed = new Discord.RichEmbed()
+    .setColor('#AABBED')
+    .setTitle('Joined guild!')
+    .addField('Name:', guild.name)
+    .addField('Bots:', bots)
+    .addField('Users', users)
+    .setTimestamp();
+    logger.send(embed);
+});
+
 //Read command files
 
 function readCommands(){
@@ -105,6 +149,10 @@ function readCommands(){
 readCommands();
 
 //End reading command files
+
+const DBW = require('discord-botworld-api');
+ 
+const dbwClient = new DBW.Client(process.env.DBW_TOKEN, '404762043527462922');
 
 bot.on('ready', () => {
     console.log('Bot has logged in!');
