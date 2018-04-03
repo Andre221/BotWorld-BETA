@@ -82,6 +82,6 @@ module.exports.help = {
     name: 'mcstatus',
     aliases: [],
     usage: '{*}mcstatus',
-    type: 'games=>test=>minecraft',
+    type: 'games=>minecraft',
     description: 'Get minecrafts api status.'
 }
