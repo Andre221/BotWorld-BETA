@@ -12,6 +12,8 @@ bot.messages = {user: 0, bot: 0, self: 0};
 
 bot.commands = new Discord.Collection();
 
+let logger = new Discord.WebhookClient(process.env.LOGGER_ID, process.env.LOGGER_TOKEN);
+
 //Read command files
 
 function readCommands(){
@@ -104,15 +106,17 @@ readCommands();
 
 //End reading command files
 
-const DBW = require('discord-botworld-api');
- 
-const dbwClient = new DBW.Client('6fd89b58e523b0228cd8a6000e9371d93170ffc76c1211e8d5578733b9f1c2221f299431adb4b7b690303d26733d1170', '404762043527462922');
-process.env.dbwClient = dbwClient;
-
 bot.on('ready', () => {
     console.log('Bot has logged in!');
     web = require('./web/index.js')(bot);
     dbwClient.postStats(bot.guilds.size, 0);
+    
+    let embed = new Discord.RichEmbed()
+    .setColor('#AABBED')
+    .setTitle('Started!')
+    .setDescription(bot.guilds.size + ' guilds currently')
+    .setTimestamp();
+    logger.send(embed);
 });
 
 bot.on('guildCreate', (guild) => {
