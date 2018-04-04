@@ -59,7 +59,7 @@ module.exports.run = function (command, args, message, bot) {
                                     "emoji": "<:bad:429969987436806167>"
                                 }
                             }
-                            field += Object.keys(stat)[0].substr(0, 1).toUpperCase() + Object.keys(stat)[0].substr(1).toLowerCase() + ': ' + statObject[Object.values(stat)[0]].text + ' ' + statObject[Object.values(stat)[0]].emoji + '\n';
+                            field += Object.keys(stat)[0].substr(0, 1).toUpperCase() + Object.keys(stat)[0].substr(1).toLowerCase() + ': ' + statObject[stat[Object.keys(stat)[0]].text + ' ' + statObject[stat[Object.keys(stat)[0]].emoji + '\n';
                         });
                         statusEmbed.addField('Services:', field);
                         message.channel.send(statusEmbed);
