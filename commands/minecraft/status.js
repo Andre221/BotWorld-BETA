@@ -65,7 +65,7 @@ module.exports.run = function (command, args, message, bot) {
                         message.channel.send(statusEmbed);
                     } catch (err2) {
                         console.log(err2);
-                        message.channel.send('An error occured!00');
+                        message.channel.send('An error occured!00 ' + err2);
                     }
                 }
             );
