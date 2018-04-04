@@ -17,9 +17,9 @@ const FileSync = require('lowdb/adapters/FileSync')
  
 const adapter = new FileSync('storage/balances.json')
 process.env.DB = {}
-process.env.DB.economy = low(adapter);
+process.env.DB.ECONOMY = low(adapter);
 
-process.env.DB.economy.defaults([])
+process.env.DB.ECONOMY.defaults([])
   .write();
 
 let logger = new Discord.WebhookClient(process.env.LOGGER_ID, process.env.LOGGER_TOKEN);
