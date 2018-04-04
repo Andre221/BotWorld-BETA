@@ -3,30 +3,30 @@ const fs = require('fs');
 const paydayAdd = 500;
 
 module.exports.getBalance = function(userID){
-    let bal = process.env.DB.ECONOMY.find('id', userID);
+    let bal = process.DB.economy.find('id', userID);
     return bal && bal.balance.value() ? bal.balance.value() : 0; 
 }
 
 module.exports.setBalance = function(userID, balance){
-    if(!process.env.DB.ECONOMY.find('id', userID)){
-        process.env.DB.ECONOMY.push({
+    if(!process.DB.economy.find('id', userID)){
+        process.DB.economy.push({
             id: userID,
             balance: balance
         }).write();
     }else{
-        process.env.DB.ECONOMY.find('id', userID).set('balance', balance).write();
+        process.DB.economy.find('id', userID).set('balance', balance).write();
     }
 }
 
 module.exports.setLastPayday = function(userID, now){
-    if(!process.env.DB.ECONOMY.find('id', userID)){
-        process.env.DB.ECONOMY.push({
+    if(!process.DB.economy.find('id', userID)){
+        process.DB.economy.push({
             id: userID,
             balance: 0,
             lastPayday: now
         }).write();
     }else{
-        process.env.DB.ECONOMY.find('id', userID).set('lastPayday', now).write();
+        process.DB.economy.find('id', userID).set('lastPayday', now).write();
     }
 }
 
@@ -39,7 +39,7 @@ module.exports.subtractBalance = function(userID, toSubtract){
 }
 
 module.exports.getLastPayday = function(userID){
-    return process.env.DB.ECONOMY.find('id', userID) && process.env.DB.ECONOMY.find('id', userID).value().lastPayday ? process.env.DB.ECONOMY.find('id', userID).value().lastPayday : false;
+    return process.DB.economy.find('id', userID) && process.DB.economy.find('id', userID).value().lastPayday ? process.DB.economy.find('id', userID).value().lastPayday : false;
 }
 
 module.exports.payday = function(userID){

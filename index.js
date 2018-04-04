@@ -12,15 +12,15 @@ bot.messages = {user: 0, bot: 0, self: 0};
 
 bot.commands = new Discord.Collection();
 
-const low = require('lowdb')
-const FileSync = require('lowdb/adapters/FileSync')
+const low = require('lowdb');
+const FileSync = require('lowdb/adapters/FileSync');
  
-const adapter = new FileSync('storage/balances.json')
-process.env.DB = {}
-process.env.DB.ECONOMY = low(adapter);
+const adapter = new FileSync('storage/balances.json');
+process.DB = {};
+process.DB.economy = low(adapter);
 
-process.env.DB.ECONOMY.defaults([])
-  .write();
+process.DB.economy.defaults({ posts: [], user: {} })
+  .write()
 
 let logger = new Discord.WebhookClient(process.env.LOGGER_ID, process.env.LOGGER_TOKEN);
 
