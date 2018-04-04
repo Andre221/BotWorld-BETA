@@ -1,33 +1,33 @@
 const fs = require('fs');
 
-const balances = require('../storage/balances.json');
-
 const paydayAdd = 500;
 
-function updateJSON(){
-    fs.writeFile(`${process.cwd()}/storage/balances.json`, JSON.stringify(balances, null, 2), function (err) {
-         if (err) return console.log(err);
-    });
-}
-
 module.exports.getBalance = function(userID){
-    return balances[userID] && balances[userID].balance ? balances[userID].balance : 0; 
+    let bal = process.env.DB.economy.find('id', userID);
+    return bal && bal.balance.value() ? bal.balance.value() : 0; 
 }
 
 module.exports.setBalance = function(userID, balance){
-    if(!balances[userID]){
-        balances[userID] = {};
+    if(!process.env.DB.economy.find('id', userID)){
+        process.env.DB.economy.push({
+            id: userID,
+            balance: balance
+        }).write();
+    }else{
+        process.env.DB.economy.find('id', userID).set('balance', balance).write();
     }
-    balances[userID].balance = balance;
-    updateJSON();
 }
 
 module.exports.setLastPayday = function(userID, now){
-    if(!balances[userID]){
-        balances[userID] = {};
+    if(!process.env.DB.economy.find('id', userID)){
+        process.env.DB.economy.push({
+            id: userID,
+            balance: 0,
+            lastPayday: now
+        }).write();
+    }else{
+        process.env.DB.economy.find('id', userID).set('lastPayday', now).write();
     }
-    balances[userID].lastPayday = now;
-    updateJSON();
 }
 
 module.exports.addBalance = function(userID, toAdd){
@@ -39,7 +39,7 @@ module.exports.subtractBalance = function(userID, toSubtract){
 }
 
 module.exports.getLastPayday = function(userID){
-    return balances[userID] && balances[userID].lastPayday ? balances[userID].lastPayday : false;
+    return process.env.DB.economy.find('id', userID) && process.env.DB.economy.find('id', userID).value().lastPayday ? process.env.DB.economy.find('id', userID).value().lastPayday : false;
 }
 
 module.exports.payday = function(userID){
