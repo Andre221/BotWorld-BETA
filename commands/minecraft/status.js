@@ -36,12 +36,12 @@ module.exports.run = function (command, args, message, bot) {
                         stats = JSON.parse(stats);
                         if (err) {
                             console.log(err);
-                            return message.channel.send('An error occured!');;
+                            return message.channel.send('An error occured!01');;
                         }
                         try {
                             if (body.error) {
                                 console.log(body.error);
-                                return message.channel.send('An error occured!');
+                                return message.channel.send('An error occured!02');
                             }
 
                             let field = '';
@@ -66,7 +66,7 @@ module.exports.run = function (command, args, message, bot) {
                             message.channel.send(statusEmbed);
                         } catch (err2) {
                             console.log(err2);
-                            message.channel.send('An error occured!');
+                            message.channel.send('An error occured!00');
                         }
                     }
                 );
