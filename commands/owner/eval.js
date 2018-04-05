@@ -28,6 +28,7 @@ function haste(code, lang = ''){
                 body: code
             },
             function (err, res, data) {
+                data = JSON.parse(data);
                 return resolve(`https://hastebin.com/${data.key}${lang && `.${lang}`}`);
             }
         );
