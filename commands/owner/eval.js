@@ -18,6 +18,22 @@ function getLocal(path, callback) {
     });
 }
 
+const request = require('request');
+function haste(code, lang = ''){
+    return new Promise((resolve, reject) => {
+        request(
+            {
+                method: "POST",
+                url: 'https://hastebin.com/documents',
+                body: code
+            },
+            function (err, res, data) {
+                return resolve(`https://hastebin.com/${data.key}${lang && `.${lang}`}`);
+            }
+        );
+    });
+}
+
 module.exports.run = function (command, args, message, bot) {
     let dbwClient = process.env.dbwClient;
     function clean(text) {
@@ -45,7 +61,7 @@ module.exports.run = function (command, args, message, bot) {
                         .addField('Type', '```js\n' + (typeof rawEvaled).substr(0, 1).toUpperCase() + (typeof rawEvaled).substr(1) + '```');
                     return message.channel.send(embed);
                 } catch (err) {
-                    require('hastebin-generator')(cleaned, 'js').then(link => {
+                    haste(cleaned, 'js').then(link => {
                         let embed = new Discord.RichEmbed()
                             .setColor('#AABBED')
                             .setTitle('Evaluation')
@@ -65,7 +81,7 @@ module.exports.run = function (command, args, message, bot) {
                         .addField('Type', '```js\n' + (typeof rawEvaled).substr(0, 1).toUpperCase() + (typeof rawEvaled).substr(1) + '```');
                     return message.channel.send(embed);
                 } catch (err) {
-                    require('hastebin-generator')(cleaned, 'js').then(link => {
+                    haste(cleaned, 'js').then(link => {
                         let embed = new Discord.RichEmbed()
                             .setColor('#AABBED')
                             .setTitle('Evaluation')
@@ -84,7 +100,7 @@ module.exports.run = function (command, args, message, bot) {
                 .addField('Result', '```xl\n' + err.toString() + '```')
                 .addField('Type', '```js\nError```')
             return message.channel.send(embed).catch(err => {
-                require('hastebin-generator')(err, 'js').then(link => {
+                haste(err, 'js').then(link => {
                     let embed = new Discord.RichEmbed()
                         .setColor('#770306')
                         .setTitle('Evaluation')
