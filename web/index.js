@@ -70,6 +70,10 @@ app.get('/stats/js', (req, res) => {
     res.sendFile(process.cwd() + '/web/htmlCss/stats/index.js');
 });
 
+app.get('/server', (req, res) => {
+    res.redirect('https://discord.gg/7BFUx6p');
+});
+
 app.listen(process.env.PORT);
 
 module.exports = function(client){
