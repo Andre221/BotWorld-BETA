@@ -17,7 +17,7 @@ module.exports.run = function(command, args, message, bot){
                     }else{
                         let avatarEmbed = new Discord.RichEmbed()
                         .setColor('#AABBED')
-                        .setTitle(body.name)
+                        .setTitle(body.name + '\'s Avatar')
                         .setImage('https://crafatar.com/renders/body/' + body.id + '.png')
                         .setFooter('Triggered by bb-mcavatar');
                         message.channel.send(avatarEmbed);
@@ -45,7 +45,7 @@ module.exports.run = function(command, args, message, bot){
                         }else{
                             let avatarEmbed = new Discord.RichEmbed()
                             .setColor('#AABBED')
-                            .setTitle(body.name)
+                            .setTitle(body.name + '\'s Avatar')
                             .setImage('https://crafatar.com/renders/body/' + body.id + '.png')
                             .setFooter('Triggered by bb-mcavatar');
                             message.channel.send(avatarEmbed);
