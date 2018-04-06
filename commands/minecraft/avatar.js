@@ -17,8 +17,9 @@ module.exports.run = function(command, args, message, bot){
                     }else{
                         let avatarEmbed = new Discord.RichEmbed()
                         .setColor('#AABBED')
-                        .setTitle(body)
-                        .setImage('https://crafatar.com/renders/body/' + body.id + '.png');
+                        .setTitle(body.name)
+                        .setImage('https://crafatar.com/renders/body/' + body.id + '.png')
+                        .setFooter('Triggered by bb-mcavatar');
                         message.channel.send(avatarEmbed);
                     }
                 }catch(err){
@@ -42,7 +43,12 @@ module.exports.run = function(command, args, message, bot){
                         if(!body.name){
                             message.reply('Invalid user!');
                         }else{
-                            message.channel.sendFile('https://crafatar.com/renders/body/' + body.id + '.png');
+                            let avatarEmbed = new Discord.RichEmbed()
+                            .setColor('#AABBED')
+                            .setTitle(body.name)
+                            .setImage('https://crafatar.com/renders/body/' + body.id + '.png')
+                            .setFooter('Triggered by bb-mcavatar');
+                            message.channel.send(avatarEmbed);
                         }
                     }catch(err){
                         message.reply('Invalid user!');
