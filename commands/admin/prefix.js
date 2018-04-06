@@ -6,6 +6,7 @@ module.exports.run = function(command, args, message, bot){
         .setColor('#AABBED')
         .setTitle(message.guild.name + '\'s Prefix')
         .setDescription('The prefix in this server is: ' + process.DB.prefixes.get('servers').get(message.guild.id).value() ? process.DB.prefixes.get('servers').get(message.guild.id).value() : 'None (No custom prefix set)');
+        message.channel.send(embed);
     }else if(args[0]=='set'){
         if(message.member.hasPermission('MANAGE_MESSAGES') || message.author.id=='292377829105205249'){
             if(args[1]){

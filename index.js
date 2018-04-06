@@ -269,18 +269,26 @@ bot.on('message', (message) => {
         }
         if(message.author.bot) return;
         let prefixes = ['bb-', '<@' + bot.user.id + '> '];
+        if(process.DB.prefixes.get('servers').get(message.guild.id).value()){
+            prefixes[prefixes.length] = process.DB.prefixes.get('servers').get(message.guild.id).value();
+        }
+
+        let ran = false;
 
         prefixes.forEach(prefix => {
-            if(message.content.substring(0, prefix.length)==prefix){
-                let args = message.content.substr(prefix.length).split(' ');
-                let command = args[0];
-                args.shift();
-            
-                bot.commands.forEach(cmd => {
-                    if(cmd.help.name==command.toLowerCase() || cmd.help.aliases.includes(command.toLowerCase())){
-                        cmd.run(command, args, message, bot);
-                    }
-                });
+            if(!ran){
+                if(message.content.substring(0, prefix.length)==prefix){
+                    let args = message.content.substr(prefix.length).split(' ');
+                    let command = args[0];
+                    args.shift();
+                
+                    bot.commands.forEach(cmd => {
+                        if(cmd.help.name==command.toLowerCase() || cmd.help.aliases.includes(command.toLowerCase())){
+                            ran = true;
+                            cmd.run(command, args, message, bot);
+                        }
+                    });
+                }
             }
         });
     }catch(err){
