@@ -23,6 +23,7 @@ module.exports.run = function(command, args, message, bot){
             }
         );
     }else{
+        message.channel.send('Please say the name of the user you wish to get the avatar of...');
         message.awaitNext({}, message.channel.id, (msg) => {
             msg.end();
             request(
