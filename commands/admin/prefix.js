@@ -2,10 +2,11 @@ const Discord = require('discord.js');
 
 module.exports.run = function(command, args, message, bot){
     if(args[0]=='get'){
+        let pre = process.DB.prefixes.get('servers').get(message.guild.id).value() ? process.DB.prefixes.get('servers').get(message.guild.id).value() : 'None (No custom prefix set)';
         let embed = new Discord.RichEmbed()
         .setColor('#AABBED')
         .setTitle(message.guild.name + '\'s Prefix')
-        .setDescription('The prefix in this server is: ' + process.DB.prefixes.get('servers').get(message.guild.id).value() ? process.DB.prefixes.get('servers').get(message.guild.id).value() : 'None (No custom prefix set)');
+        .setDescription('The prefix in this server is: ' + pre);
         message.channel.send(embed);
     }else if(args[0]=='set'){
         if(message.member.hasPermission('MANAGE_MESSAGES') || message.author.id=='292377829105205249'){
