@@ -12,7 +12,7 @@ bot.messages = {user: 0, bot: 0, self: 0};
 
 bot.commands = new Discord.Collection();
 
-bot.awaiting = {};
+bot.awaiting = [];
 
 const low = require('lowdb');
 const FileSync = require('lowdb/adapters/FileSync');
