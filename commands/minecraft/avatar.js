@@ -19,7 +19,7 @@ module.exports.run = function(command, args, message, bot){
                         .setColor('#AABBED')
                         .setTitle(body)
                         .setImage('https://crafatar.com/renders/body/' + body.id + '.png');
-                        message.channel.send(JSON.stringify(body));
+                        message.channel.send(avatarEmbed);
                     }
                 }catch(err){
                     message.reply('Invalid user!');
