@@ -171,7 +171,7 @@ Discord.Message.prototype.awaitNext = function(dataKept, channel, cb, inf){
 }
 
 Discord.Message.prototype.end = function(){
-    bot.awaiting[message.author.id] = undefined;
+    bot.awaiting[this.author.id] = undefined;
 }
 
 bot.on('message', (message) => {
