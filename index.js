@@ -168,7 +168,7 @@ const dbwClient = new DBW.Client(process.env.DBW_TOKEN, '404762043527462922');
 
 Discord.Message.prototype.awaitNext = function(dataKept, channel, cb){
     bot.awaiting[this.author.id] = {channel: channel, kept: dataKept,cb: cb};
-    bot.awaiting[this.author.id] = undefined;
+    bot.awaiting[this.author.id] = false;
 }
 
 bot.on('message', (message) => {
