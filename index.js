@@ -12,6 +12,8 @@ bot.messages = {user: 0, bot: 0, self: 0};
 
 bot.commands = new Discord.Collection();
 
+bot.awaiting = {};
+
 const low = require('lowdb');
 const FileSync = require('lowdb/adapters/FileSync');
  
@@ -164,6 +166,23 @@ const DBW = require('discord-botworld-api');
  
 const dbwClient = new DBW.Client(process.env.DBW_TOKEN, '404762043527462922');
 
+Discord.Message.prototype.awaitNext = function(dataKept, channel, cb){
+    bot.awaiting[this.author.id] = {channel: channel, keep: dataKept,cb: cb};
+}
+
+bot.on('message', (message) => {
+    if(bot.awaiting[message.author.id]){
+        if(bot.awaiting[message.author.id].channel){
+            if(bot.awaiting[message.author.id].channel==message.channel.id){
+                bot.awaiting[message.author.id].cb(message, kept);
+            }
+        }else{
+            bot.awaiting[message.author.id].cb(message, kept);
+        }
+    }
+});
+
+
 bot.on('ready', () => {
     console.log('Bot has logged in!');
     web = require('./web/index.js')(bot);
@@ -175,6 +194,8 @@ bot.on('ready', () => {
     .setDescription(bot.guilds.size + ' guilds currently')
     .setTimestamp();
     logger.send(embed);
+
+    process.env.bot = bot;
 });
 
 bot.on('guildCreate', (guild) => {
