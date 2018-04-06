@@ -26,7 +26,7 @@ process.DB.economy.defaults({users:[]})
 .write();
 
 
-const preAdapter = new FileSync('.data/balances.json');
+const preAdapter = new FileSync('.data/prefixes.json');
 
 process.DB.prefixes = low(preAdapter);
 
@@ -269,6 +269,7 @@ bot.on('message', (message) => {
         }
         if(message.author.bot) return;
         let prefixes = ['bb-', '<@' + bot.user.id + '> '];
+
         if(process.DB.prefixes.get('servers').get(message.guild.id).value()){
             prefixes[prefixes.length] = process.DB.prefixes.get('servers').get(message.guild.id).value();
         }
