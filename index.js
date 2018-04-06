@@ -30,7 +30,7 @@ const preAdapter = new FileSync('.data/prefixes.json');
 
 process.DB.prefixes = low(preAdapter);
 
-process.DB.prefixes.defaults({servers:[]})
+process.DB.prefixes.defaults({servers: {}})
   .write();
 
 let logger = new Discord.WebhookClient(process.env.LOGGER_ID, process.env.LOGGER_TOKEN);
