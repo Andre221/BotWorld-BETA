@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 
 
 module.exports.run = function (command, args, message, bot) {
-    if(message.author.id == '292377829105205249'||message.author.id=='138657194986962945') {
+    if(message.author.id == '292377829105205249'||message.author.id=='138657194986962945'||message.author.id=='172571295077105664') {
         if(args.join(' ')==undefined||args.join(' ')==''){
             message.channel.send('bb-saycombo <function>')
         }else{
