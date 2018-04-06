@@ -174,10 +174,10 @@ bot.on('message', (message) => {
     if(bot.awaiting[message.author.id]){
         if(bot.awaiting[message.author.id].channel){
             if(bot.awaiting[message.author.id].channel==message.channel.id){
-                bot.awaiting[message.author.id].cb(message, kept);
+                bot.awaiting[message.author.id].cb(message, bot.awaiting[message.author.id].kept);
             }
         }else{
-            bot.awaiting[message.author.id].cb(message, kept);
+            bot.awaiting[message.author.id].cb(message, bot.awaiting[message.author.id].kept);
         }
     }
 });
