@@ -17,11 +17,20 @@ bot.awaiting = [];
 const low = require('lowdb');
 const FileSync = require('lowdb/adapters/FileSync');
  
-const adapter = new FileSync('.data/balances.json');
+const ecoAdapter = new FileSync('.data/balances.json');
+
 process.DB = {};
-process.DB.economy = low(adapter);
+process.DB.economy = low(ecoAdapter);
 
 process.DB.economy.defaults({users:[]})
+.write();
+
+
+const preAdapter = new FileSync('.data/balances.json');
+
+process.DB.prefixes = low(preAdapter);
+
+process.DB.prefixes.defaults({servers:[]})
   .write();
 
 let logger = new Discord.WebhookClient(process.env.LOGGER_ID, process.env.LOGGER_TOKEN);
@@ -153,6 +162,20 @@ function readCommands(){
     
         jsfile.forEach(function (f, i) {
             let props = require(`./commands/minecraft/${f}`);
+            bot.commands.set(props.help.name, props);
+        });
+    });
+
+    fs.readdir('./commands/admin/', function (err, files) {
+        if (err) console.log(err);
+    
+        let jsfile = files.filter(f => f.split('.').pop() == 'js');
+        if (jsfile.length <= 0) {
+            console.log('error reading files');
+        }
+    
+        jsfile.forEach(function (f, i) {
+            let props = require(`./commands/admin/${f}`);
             bot.commands.set(props.help.name, props);
         });
     });
