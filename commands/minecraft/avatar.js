@@ -19,7 +19,7 @@ module.exports.run = function(command, args, message, bot){
                         .setColor('#AABBED')
                         .setTitle(body.name + '\'s Avatar')
                         .setImage('https://crafatar.com/renders/body/' + body.id + '.png')
-                        .setFooter('Triggered by bb-mcavatar');
+                        .setFooter('In response to bb-mcavatar', message.author.displayAvatarURL.split('?')[0]);
                         message.channel.send(avatarEmbed);
                     }
                 }catch(err){
@@ -47,7 +47,7 @@ module.exports.run = function(command, args, message, bot){
                             .setColor('#AABBED')
                             .setTitle(body.name + '\'s Avatar')
                             .setImage('https://crafatar.com/renders/body/' + body.id + '.png')
-                            .setFooter('Triggered by bb-mcavatar');
+                            .setFooter('In response to bb-mcavatar', message.author.displayAvatarURL.split('?')[0]);
                             message.channel.send(avatarEmbed);
                         }
                     }catch(err){
