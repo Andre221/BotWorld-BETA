@@ -175,6 +175,7 @@ bot.on('message', (message) => {
         if(bot.awaiting[message.author.id].channel){
             if(bot.awaiting[message.author.id].channel==message.channel.id){
                 bot.awaiting[message.author.id].cb(message, bot.awaiting[message.author.id].kept);
+                bot.awaiting[message.author.id] = undefined;
             }
         }else{
             bot.awaiting[message.author.id].cb(message, bot.awaiting[message.author.id].kept);
