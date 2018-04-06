@@ -166,20 +166,34 @@ const DBW = require('discord-botworld-api');
  
 const dbwClient = new DBW.Client(process.env.DBW_TOKEN, '404762043527462922');
 
-Discord.Message.prototype.awaitNext = function(dataKept, channel, cb){
-    bot.awaiting[this.author.id] = {channel: channel, kept: dataKept,cb: cb};
+Discord.Message.prototype.awaitNext = function(dataKept, channel, cb, inf){
+    bot.awaiting[this.author.id] = {channel: channel, kept: dataKept,cb: cb, inf: inf ? inf : false};
 }
 
 bot.on('message', (message) => {
     if(bot.awaiting[message.author.id]){
         if(bot.awaiting[message.author.id].channel){
             if(bot.awaiting[message.author.id].channel==message.channel.id){
+                if(bot.awaiting[message.author.id].inf){
+                    message.prototype.end = function(){
+                        bot.awaiting[message.author.id] = undefined;
+                    }
+                    bot.awaiting[message.author.id].cb(message, bot.awaiting[message.author.id].kept);
+                }else{
+                    bot.awaiting[message.author.id].cb(message, bot.awaiting[message.author.id].kept);
+                    bot.awaiting[message.author.id] = undefined;
+                }
+            }
+        }else{
+            if(bot.awaiting[message.author.id].inf){
+                message.prototype.end = function(){
+                    bot.awaiting[message.author.id] = undefined;
+                }
+                bot.awaiting[message.author.id].cb(message, bot.awaiting[message.author.id].kept);
+            }else{
                 bot.awaiting[message.author.id].cb(message, bot.awaiting[message.author.id].kept);
                 bot.awaiting[message.author.id] = undefined;
             }
-        }else{
-            bot.awaiting[message.author.id].cb(message, bot.awaiting[message.author.id].kept);
-            bot.awaiting[message.author.id] = undefined;
         }
     }
 });
