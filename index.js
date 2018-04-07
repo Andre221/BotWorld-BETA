@@ -14,6 +14,8 @@ bot.commands = new Discord.Collection();
 
 bot.awaiting = [];
 
+bot.bridges = [];
+
 const low = require('lowdb');
 const FileSync = require('lowdb/adapters/FileSync');
  
@@ -219,6 +221,18 @@ bot.on('message', (message) => {
     }
 });
 
+
+bot.on('message', (message) => {
+    if(!message.author.bot){
+        bot.bridges.forEach(bridge => {
+            if(bridge.to==message.channel.id){
+                bot.channels.get(bridge.from).send(message.author.tag + ': ' + message.content);
+            }else if(bridge.from==message.channel.id){
+                bot.channels.get(bridge.to).send(message.author.tag + ': ' + message.content);
+            }
+        });
+    }
+});
 
 bot.on('ready', () => {
     console.log('Bot has logged in!');
