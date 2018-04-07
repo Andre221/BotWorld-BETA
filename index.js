@@ -221,8 +221,8 @@ bot.on('message', (message) => {
     }
 });
 
-
 bot.on('message', (message) => {
+    if(message.author.id==bot.user.id) return;
     let bridge = bot.bridge;
     let bn;
     if(message.author.bot) bn = '(BOT)';
