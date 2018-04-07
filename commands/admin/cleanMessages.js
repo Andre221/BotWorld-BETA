@@ -4,10 +4,7 @@ module.exports.run = function (command, args, message, bot) {
     if (message.member.hasPermission('MANAGE_MESSAGES') || message.author.id == '292377829105205249') {
         message.channel.fetchMessages({limit: 100}).then(messages => {
             let toDelete = messages.filter(msg => {return msg.author.id==bot.user.id});
-            message.channel.send(messages.filter(msg => {return msg.author.id==bot.user.id}));
-            toDelete.forEach(msg => {
-                msg.delete();
-            });
+            message.channel.bulkDelete(toDelete);
         });
         message.reply(`Cleaned!`).then(msg => {
             setTimeout(() => {
