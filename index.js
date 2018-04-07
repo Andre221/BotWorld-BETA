@@ -221,6 +221,7 @@ bot.on('message', (message) => {
     }
 });
 
+const msgEmbedToRich = require("discordjs-embed-converter");
 bot.on('message', (message) => {
     if(message.author.id==bot.user.id) return;
     let bridge = bot.bridge;
@@ -236,7 +237,7 @@ bot.on('message', (message) => {
         }
         if(message.embeds){
             message.embeds.forEach(embed => {
-                bot.channels.get(bridge.from).send(embed);
+                bot.channels.get(bridge.from).send(msgEmbedToRich(embed));
             });
         }
     } else if (bridge.from == message.channel.id) {
@@ -248,7 +249,7 @@ bot.on('message', (message) => {
         }
         if(message.embeds){
             message.embeds.forEach(embed => {
-                bot.channels.get(bridge.to).send(embed);
+                bot.channels.get(bridge.to).send(msgEmbedToRich(embed));
             });
         }
     }

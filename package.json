@@ -26,6 +26,7 @@
     "youtube-search": "^1.1.0",
     "ytdl-core": "^0.20.2",
     "canvas": "^1.6.10",
-    "lowdb": "^1.0.0"
+    "lowdb": "^1.0.0",
+    "discordjs-embed-converter": "^1.2.2"
   }
 }
