@@ -223,22 +223,33 @@ bot.on('message', (message) => {
 
 
 bot.on('message', (message) => {
-    if (!message.author.bot) {
-        let bridge = bot.bridge;
-        if (bridge.to == message.channel.id) {
-            bot.channels.get(bridge.from).send(message.author.tag + ': ' + message.content);
-            if(message.attachments){
-                message.attachments.forEach(file => {
-                    bot.channels.get(bridge.from).sendFile(file.url)
-                });
-            }
-        } else if (bridge.from == message.channel.id) {
-            bot.channels.get(bridge.to).send(message.author.tag + ': ' + message.content);
-            if(message.attachments){
-                message.attachments.forEach(file => {
-                    bot.channels.get(bridge.to).sendFile(file.url)
-                });
-            }
+    let bridge = bot.bridge;
+    let bn;
+    if(message.author.bot) bn = '(BOT)';
+    if(!message.author.bot) bn = '(USER)';
+    if (bridge.to == message.channel.id) {
+        bot.channels.get(bridge.from).send(message.author.tag + ' ' + bn + ': ' + message.content);
+        if (message.attachments) {
+            message.attachments.forEach(file => {
+                bot.channels.get(bridge.from).sendFile(file.url)
+            });
+        }
+        if(message.embeds){
+            message.embeds.forEach(embed => {
+                bot.channels.get(bridge.from).send(embed);
+            });
+        }
+    } else if (bridge.from == message.channel.id) {
+        bot.channels.get(bridge.to).send(message.author.tag + ' ' + bn  + ': ' + message.content);
+        if (message.attachments) {
+            message.attachments.forEach(file => {
+                bot.channels.get(bridge.to).sendFile(file.url)
+            });
+        }
+        if(message.embeds){
+            message.embeds.forEach(embed => {
+                bot.channels.get(bridge.to).send(embed);
+            });
         }
     }
 });
