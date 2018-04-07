@@ -146,6 +146,7 @@ html{
     text-align: center;
     font-size: 60px;
     animation: fadeIn 3s alternate;
+    font-family: "Frutiger Neue W02 Book", Arial, Helvetica, sans-serif;
 }
 
 .bot-avatar{
