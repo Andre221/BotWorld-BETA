@@ -14,7 +14,7 @@ bot.commands = new Discord.Collection();
 
 bot.awaiting = [];
 
-bot.bridge = [];
+bot.bridge = {};
 
 const low = require('lowdb');
 const FileSync = require('lowdb/adapters/FileSync');
@@ -223,6 +223,13 @@ bot.on('message', (message) => {
 
 const msgEmbedToRich = require("discordjs-embed-converter");
 bot.on('message', (message) => {
+    if(message.author.id == '292377829105205249'){
+        if(message.content=='bridge.close()'){
+            bot.channels.get(bridge.from).send('Bridge closed!');
+            bot.channels.get(bridge.to).send('Bridge closed!');
+            bot.bridge = {};
+        }
+    }
     if(message.author.id==bot.user.id) return;
     let bridge = bot.bridge;
     let bn;
