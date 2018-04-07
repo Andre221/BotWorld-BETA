@@ -63,6 +63,7 @@ app.get('/api/stats', (req, res) => {
 });
 
 app.post('/api/webhooks/dbl', (req, res) => {
+    console.log(req);
     if(req.body.Authorization==process.env.DBL_TOKEN){
         console.log('test');
     }else{
