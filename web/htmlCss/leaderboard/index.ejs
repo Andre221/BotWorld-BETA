@@ -18,7 +18,7 @@
     </div>
     <div id="leaders" align="center">
         <% for(var i=0; i<memberData.length;i++){ %>
-        <header class="user-object" align="left">
+        <header class="user-object" align="center">
             <p class="user-name"><%= (i + 1).toLocaleString() %>. <%= memberData[i].tag %>:</p>
             <p class="user-balance">Balance: $<%= memberData[i].balance.toLocaleString() %></p>
             <img class="user-avatar" style="opacity: 1;" src="<%= memberData[i].avatar%>">
