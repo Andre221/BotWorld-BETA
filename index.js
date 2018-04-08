@@ -16,6 +16,9 @@ bot.awaiting = [];
 
 bot.bridge = {};
 
+bot.startedAt = Date.now();
+console.log(bot.startedAt);
+
 const low = require('lowdb');
 const FileSync = require('lowdb/adapters/FileSync');
 
