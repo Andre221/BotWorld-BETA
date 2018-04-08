@@ -113,7 +113,7 @@ html{
     padding: 0px;
     margin: 0px;
     border: 0px;
-    position: absolute;
+    position: fixed;
     left: 0px;
     top: 0px;
     animation: inFromLeft 1s alternate;
