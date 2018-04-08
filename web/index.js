@@ -64,7 +64,7 @@ app.get('/api/stats', (req, res) => {
 
 app.post('/api/webhooks/dbl', (req, res) => {
     if(req.headers.authorization==process.env.DBL_TOKEN){
-        console.log('test');
+        bot.channels.get('265156286406983680').send('vote, ```json\n' + req.body + '```');
     }else{
         res.sendStatus(403);
     }
