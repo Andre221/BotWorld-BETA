@@ -59,14 +59,14 @@ app.get('/stats', (req, res) => {
     res.render(process.cwd() + '/web/htmlCss/stats/index.ejs', {guildCount: bot.guilds.size, uptime: msToTime(bot.uptime), ping: bot.ping, userCount: bot.users.size, messages: bot.messages, process: process, os: require('os')});
 });
 app.get('/api/stats', (req, res) => {
-    res.send({guildCount: bot.guilds.size, uptime: msToTime(bot.uptime), ping: bot.ping, userCount: bot.users.size, messages: bot.messages, start: bot.startedAt});
+    res.send({guildCount: bot.guilds.size, uptime: msToTime(bot.uptime), ping: bot.ping, userCount: bot.users.size, messages: bot.messages, start: bot.startedAt, channels: bot.channels.size});
 });
 
 app.post('/api/webhooks/dbl', (req, res) => {
     if(req.headers.authorization==process.env.DBL_TOKEN){
         console.log('test');
     }else{
-        console.log('fail');
+        res.sendStatus(403);
     }
 });
 
