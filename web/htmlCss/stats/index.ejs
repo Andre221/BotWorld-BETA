@@ -12,6 +12,7 @@
         <p id="message-user">User Messages: <%= messages.user %></p>
         <p id="message-bot">Bot Messages: <%= messages.bot %></p>
         <p id="message-self">Self Messages: <%= messages.self %></p>
+        <p id="os">OS: <%= os.platform() +' ' + os.arch() + ' ' + os.release()%></p>
     </body>
     <script src="/stats/js"></script>
 </html>
