@@ -1,6 +1,6 @@
 body{
-    background-image: url("http://a1star.com/images/star--background-seamless-repeating9.jpg");
-    background-repeat: repeat;
+    background-image: url("https://botworld-beta.glitch.me/images/b-top");
+    background-attachment: fixed;
 }
 
 .user-name{
