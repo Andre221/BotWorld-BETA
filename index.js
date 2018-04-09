@@ -38,6 +38,13 @@ process.DB.prefixes = low(preAdapter);
 process.DB.prefixes.defaults({ servers: {} })
     .write();
 
+const voteAdapter = new FileSync('.data/votes.json');
+
+process.DB.votes = low(voteAdapter);
+
+process.DB.votes.defaults({ users: [] })
+    .write();
+
 let logger = new Discord.WebhookClient(process.env.LOGGER_ID, process.env.LOGGER_TOKEN);
 
 bot.on('guildCreate', (guild) => {

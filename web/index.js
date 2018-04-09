@@ -68,7 +68,21 @@ app.get('/api/stats', (req, res) => {
 
 app.post('/api/webhooks/dbl', (req, res) => {
     if(req.headers.authorization==process.env.DBL_TOKEN){
-        bot.channels.get('265156286406983680').send('vote, ```json\n' + JSON.stringify(Object.keys(req.body)) + '```');
+        let user = process.DB.votes.get('users').find({id: req.body.user});
+        if(!user.value()){
+            process.DB.votes.get('users').push({
+                id: req.params.user,
+                votes: [
+                    {
+                        time: Date.now()
+                    }
+                ]
+            }).write();
+        }else{
+            user.get('votes').push({
+                time: Date.now()
+            }).write();
+        }
     }else{
         res.sendStatus(403);
     }
