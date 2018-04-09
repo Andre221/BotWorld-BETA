@@ -16,8 +16,8 @@ module.exports.run = function(command, args, message, bot){
 }
 
 module.exports.help = {
-    name: 'support',
-    aliases: ['server'],
+    name: 'rot13',
+    aliases: ['egb13'],
     usage: '{*}rot13 <encode|decode> <text>',
     type: 'cryptography',
     description: 'Encode/Decode ROT13'
