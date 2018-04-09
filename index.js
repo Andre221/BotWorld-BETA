@@ -184,6 +184,20 @@ function readCommands() {
             bot.commands.set(props.help.name, props);
         });
     });
+
+    fs.readdir('./commands/cryptography/', function (err, files) {
+        if (err) console.log(err);
+
+        let jsfile = files.filter(f => f.split('.').pop() == 'js');
+        if (jsfile.length <= 0) {
+            console.log('error reading files');
+        }
+
+        jsfile.forEach(function (f, i) {
+            let props = require(`./commands/cryptography/${f}`);
+            bot.commands.set(props.help.name, props);
+        });
+    });
 }
 
 readCommands();
