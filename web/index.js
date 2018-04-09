@@ -71,7 +71,7 @@ app.post('/api/webhooks/dbl', (req, res) => {
         let user = process.DB.votes.get('users').find({id: req.body.user});
         if(!user.value()){
             process.DB.votes.get('users').push({
-                id: req.params.user,
+                id: req.body.user,
                 votes: [
                     {
                         time: Date.now()
