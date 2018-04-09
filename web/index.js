@@ -1,5 +1,9 @@
 const express = require('express');
 let app = express();
+let bodyParser = require("body-parser");
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 const economy = require('../plugins/economy.js');
 

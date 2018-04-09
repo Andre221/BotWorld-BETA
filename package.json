@@ -27,6 +27,7 @@
     "ytdl-core": "^0.20.2",
     "canvas": "^1.6.10",
     "lowdb": "^1.0.0",
-    "discordjs-embed-converter": "^1.2.2"
+    "discordjs-embed-converter": "^1.2.2",
+    "body-parser": "^1.8.1"
   }
 }
