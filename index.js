@@ -227,6 +227,7 @@ Discord.Message.prototype.end = function () {
 }
 
 bot.on('message', (message) => {
+    if(!message.channel) return;
     if (bot.awaiting[message.author.id]) {
         if (bot.awaiting[message.author.id].channel) {
             if (bot.awaiting[message.author.id].channel == message.channel.id) {
