@@ -1,5 +1,5 @@
 module.exports.registerVote = function(req, res){
-    if(req.headers.authorization==process.env.DBL_TOKEN){
+    if(req.headers.authorization==process.DBL_TOKEN){
         let user = process.DB.votes.get('users').find({id: req.body.user});
         if(!user.value()){
             process.DB.votes.get('users').push({
@@ -29,9 +29,9 @@ module.exports.getTotalVotes = function(userID){
 }
 
 module.exports.hasVoted = function(id, ms){
-    if(process.env.DB.votes.get('users').find({id: id}).value()){
-        if(process.env.DB.votes.get('users').find({id: id}).get('votes').value()){
-            let uVotes = process.env.DB.votes.get('users').find({id: id}).get('votes').value();
+    if(process.DB.votes.get('users').find({id: id}).value()){
+        if(process.DB.votes.get('users').find({id: id}).get('votes').value()){
+            let uVotes = process.DB.votes.get('users').find({id: id}).get('votes').value();
             if(uVotes[uVotes.length-1].time<=Date.now()-ms){
                 return true;
             }else{
