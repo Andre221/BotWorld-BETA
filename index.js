@@ -274,7 +274,7 @@ bot.on('message', (message) => {
                 bot.channels.get(bridge.from).send(msgEmbedToRich(embed));
             });
         }
-    } else if (bridge.from == message.channel.id) {
+    } else if (message.channel && bridge.from == message.channel.id) {
         bot.channels.get(bridge.to).send(message.author.tag + ' ' + bn  + ': ' + message.content);
         if (message.attachments) {
             message.attachments.forEach(file => {
