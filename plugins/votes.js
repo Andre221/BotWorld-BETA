@@ -1,7 +1,9 @@
+const economy = require('./economy.js');
+const Discord = require('discord.js');
 var events = require('events');
 module.exports.event = new events.EventEmitter();
 
-module.exports.registerVote = function(req, res){
+module.exports.registerVote = function(req, res, bot){
     if(req.headers.authorization==process.env.DBL_TOKEN){
         module.exports.event.emit('vote', req.body);
         let user = process.DB.votes.get('users').find({id: req.body.user});
@@ -19,6 +21,17 @@ module.exports.registerVote = function(req, res){
                 time: Date.now()
             }).write();
         }
+
+        user = req.body.user;
+        economy.addBalance(user, 1000000);
+        if(bot.users.get(user)){
+            let embed = new Discord.RichEmbed()
+            .setColor('#AABBED')
+            .setTitle('Thank you for voting, ' + bot.users.get(user).tag + '!')
+            .setDescription('As an award for your act of kidness towards this bot you get +$1,000,000 on the bot!');
+            bot.users.get(user).send(embed).catch((err)=>{});
+        }
+
     }else{
         console.log('f')
         res.sendStatus(403);

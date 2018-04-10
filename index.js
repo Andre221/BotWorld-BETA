@@ -50,17 +50,6 @@ let logger = new Discord.WebhookClient(process.env.LOGGER_ID, process.env.LOGGER
 process.votes = require('./plugins/votes.js');
 const economy = require('./plugins/economy.js');
 
-process.votes.event.on('vote', (user) => {
-    economy.addBalance(user.id, 1000000);
-    if(bot.users.get(user.id)){
-        let embed = new Discord.RichEmbed()
-        .setColor('#AABBED')
-        .setTitle('Thank you for voting!')
-        .setDescription('As an award for your act of kidness towards this bot you get +$1,000,000 on the bot!');
-        bot.users.get(user.id).send(embed).catch((err)=>{});
-    }
-});
-
 bot.on('guildCreate', (guild) => {
     let bots = 0;
     let users = 0;
@@ -273,7 +262,7 @@ bot.on('message', (message) => {
     let bn;
     if(message.author.bot) bn = '(BOT)';
     if(!message.author.bot) bn = '(USER)';
-    if (bridge.to == message.channel.id) {
+    if (message.channel && bridge.to == message.channel.id) {
         bot.channels.get(bridge.from).send(message.author.tag + ' ' + bn + ': ' + message.content);
         if (message.attachments) {
             message.attachments.forEach(file => {
