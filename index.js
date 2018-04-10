@@ -47,10 +47,10 @@ process.DB.votes.defaults({ users: [] })
 
 let logger = new Discord.WebhookClient(process.env.LOGGER_ID, process.env.LOGGER_TOKEN);
 
-const votes = require('./plugins/votes.js');
+process.votes = require('./plugins/votes.js');
 const economy = require('./plugins/economy.js');
 
-votes.event.on('vote', (user) => {
+process.votes.event.on('vote', (user) => {
     economy.addBalance(user.id, 1000000);
     if(bot.users.get(user.id)){
         let embed = new Discord.RichEmbed()

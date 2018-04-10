@@ -68,7 +68,7 @@ app.get('/api/stats', (req, res) => {
 });
 
 app.post('/api/webhooks/dbl', (req, res) => {
-    votes.registerVote(req, res);
+    process.votes.registerVote(req, res);
 });
 
 app.get('/stats/styles', (req, res) => {
