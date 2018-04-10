@@ -2,7 +2,7 @@ var events = require('events');
 module.exports.event = new events.EventEmitter();
 
 module.exports.registerVote = function(req, res){
-    if(req.headers.authorization==process.DBL_TOKEN){
+    if(req.headers.authorization==process.env.DBL_TOKEN){
         module.exports.event.emit('vote', req.body);
         let user = process.DB.votes.get('users').find({id: req.body.user});
         if(!user.value()){
