@@ -1,9 +1,9 @@
 var events = require('events');
-var eventEmitter = new events.EventEmitter();
+module.exports.event = new events.EventEmitter();
 
 module.exports.registerVote = function(req, res){
     if(req.headers.authorization==process.DBL_TOKEN){
-        eventEmitter.emit('vote', req.body);
+        module.exports.event.emit('vote', req.body);
         let user = process.DB.votes.get('users').find({id: req.body.user});
         if(!user.value()){
             process.DB.votes.get('users').push({
@@ -48,5 +48,3 @@ module.exports.hasVoted = function(id, ms){
         return false;
     }
 }
-
-module.exports.event = eventEmitter;
