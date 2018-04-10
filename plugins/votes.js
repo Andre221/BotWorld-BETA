@@ -32,7 +32,7 @@ module.exports.hasVoted = function(id, ms){
     if(process.DB.votes.get('users').find({id: id}).value()){
         if(process.DB.votes.get('users').find({id: id}).get('votes').value()){
             let uVotes = process.DB.votes.get('users').find({id: id}).get('votes').value();
-            if(uVotes[uVotes.length-1].time<=Date.now()-ms){
+            if(Date.now() - uVotes[uVotes.length-1].time<=ms){
                 return true;
             }else{
                 return false;
