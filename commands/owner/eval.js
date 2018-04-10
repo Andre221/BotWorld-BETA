@@ -1,6 +1,7 @@
 const Discord = require('discord.js');
 
 const economy = require('../../plugins/economy.js');
+const votes = require('../../plugins/votes.js');
 
 const https = require('https');
 const http = require('http');

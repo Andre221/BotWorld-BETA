@@ -6,6 +6,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 const economy = require('../plugins/economy.js');
+const votes = require('../plugins/votes.js');
 
 let bot;
 
@@ -67,25 +68,7 @@ app.get('/api/stats', (req, res) => {
 });
 
 app.post('/api/webhooks/dbl', (req, res) => {
-    if(req.headers.authorization==process.env.DBL_TOKEN){
-        let user = process.DB.votes.get('users').find({id: req.body.user});
-        if(!user.value()){
-            process.DB.votes.get('users').push({
-                id: req.body.user,
-                votes: [
-                    {
-                        time: Date.now()
-                    }
-                ]
-            }).write();
-        }else{
-            user.get('votes').push({
-                time: Date.now()
-            }).write();
-        }
-    }else{
-        res.sendStatus(403);
-    }
+    votes.registerVote(req, res);
 });
 
 app.get('/stats/styles', (req, res) => {
