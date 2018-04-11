@@ -251,6 +251,7 @@ bot.on('message', (message) => {
 
 const msgEmbedToRich = require("discordjs-embed-converter");
 bot.on('message', (message) => {
+    if(!message.channel) return;
     let bridge = bot.bridge;
     if(message.author.id == '292377829105205249'){
         if(message.content=='bridge.close()'){

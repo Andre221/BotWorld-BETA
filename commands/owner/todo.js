@@ -47,5 +47,5 @@ module.exports.help = {
     aliases: ['td'],
     usage: '{*}todo <view | add <what to do> | remove <number>>',
     type: 'owner',
-    description: ''
+    description: 'Todo list for the bot owner.'
 }
