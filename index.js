@@ -4,6 +4,11 @@ const fs = require('fs');
 let web;
 
 let bot = new Discord.Client();
+
+bot.regex = {
+    invite: /discord(?:app\.com|\.gg).{1,}?[\/invite\/].{1,}?(?:(?!.*[Ii10OolL]).{1,}?[A-z0-9]{5,6}|[a-zA-Z0-9]{2,32})/g
+}
+
 bot.saycombo = {};
 
 bot.music = [];
