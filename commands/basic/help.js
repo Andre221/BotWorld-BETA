@@ -25,7 +25,7 @@ module.exports.run = function(command, args, message, bot){
 
         if(cmds.length>=1){
             cmds.forEach(c=>{
-                helpEmbed.addField(cmd.help.usage.replace('{*}', 'bb-'), cmd.help.description);
+                helpEmbed.addField(c.help.usage.replace('{*}', 'bb-'), c.help.description);
             });
             helpEmbed.addBlankField(false);
         }
