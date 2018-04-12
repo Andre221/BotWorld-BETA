@@ -24,14 +24,14 @@ module.exports.run = function(command, args, message, bot){
         .setTitle('Help | ' + args[0].toLowerCase())
 
         if(cmds.length>=1){
-            cmds.forEach(c=>{
+            Array.from(new Set(cmds)).forEach(c=>{
                 helpEmbed.addField(c.usage.replace('{*}', 'bb-'), c.description);
             });
             helpEmbed.addBlankField(false);
         }
 
         if(secs.length>=1){
-            secs.forEach(sec => {
+            Array.from(new Set(secs)).forEach(sec => {
                 helpEmbed.addField(sec, 'bb-help ' + sec);
             });
         }
