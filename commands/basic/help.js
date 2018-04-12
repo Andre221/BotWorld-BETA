@@ -11,7 +11,7 @@ module.exports.run = function(command, args, message, bot){
     if(args[0] && sections.includes(args[0].toLowerCase())){
         let sub = false;
         bot.commands.forEach(cmd => {
-            if(cmd.help.type.split('=>')[0] == args[0].toLowerCase() && cmd.help.type.split('=>').length >1){
+            if(cmd.help.type.split('=>').includes(args[0].toLowerCase()) && cmd.help.type.split('=>').length >1){
                 sub = true;
             }
         });
