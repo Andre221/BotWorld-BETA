@@ -4,7 +4,7 @@ module.exports.run = function(command, args, message, bot){
     let sections = [];
 
     bot.commands.forEach(c => {
-        sections = fsections.concat(c.help.type);
+        sections = sections.concat(c.help.type);
     });
 
     sections = Array.from(new Set(sections));
