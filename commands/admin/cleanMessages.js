@@ -2,9 +2,11 @@ const Discord = require('discord.js');
 
 module.exports.run = function (command, args, message, bot) {
     if (message.member.hasPermission('MANAGE_MESSAGES') || message.author.id == '292377829105205249') {
-        message.channel.fetchMessages({limit: 100}).then(messages => {
+        message.channel.fetchMessages({limit: 20}).then(messages => {
             let toDelete = messages.filter(msg => {return msg.author.id==bot.user.id});
-            message.channel.bulkDelete(toDelete);
+            toDelete.forEach(m=>{
+                m.delete();
+            });
         });
         message.reply(`Cleaned!`).then(msg => {
             setTimeout(() => {
