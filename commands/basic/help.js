@@ -42,6 +42,14 @@ module.exports.run = function(command, args, message, bot){
 
         message.channel.send(helpEmbed);
 
+    }else{
+        let helpEmbed = new Discord.RichEmbed()
+        .setColor('#AABBED')
+        .setTitle('Help');
+
+        Array.from(new Set(sections.map(v=>v[0]))).forEach(s=>{
+            helpEmbed.addField(s, 'bb-help ' + s);
+        })
     }
 }
 
