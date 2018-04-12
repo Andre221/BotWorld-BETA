@@ -4,10 +4,8 @@ module.exports.run = function(command, args, message, bot){
     let sections = [];
 
     bot.commands.forEach(c => {
-        sections = sections.concat(c.help.type);
+        if(!sections.includes(c.help.type)) sections = sections.concat(c.help.type);
     });
-
-    sections = Array.from(new Set(sections));
     message.channel.send(JSON.stringify(sections, null, 2));
 
     if(args[0] && sections.filter(v=>v.includes(args[0].toLowerCase()))){
