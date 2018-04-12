@@ -6,7 +6,6 @@ module.exports.run = function(command, args, message, bot){
     bot.commands.forEach(c => {
         if(!sections.includes(c.help.type)) sections[sections.length] = c.help.type;
     });
-    message.channel.send(JSON.stringify(sections, null, 2));
 
     if(args[0] && sections.filter(v=>v.includes(args[0].toLowerCase()))){
         cmds = [];
