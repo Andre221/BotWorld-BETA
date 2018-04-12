@@ -9,14 +9,14 @@ module.exports.run = function(command, args, message, bot){
         id = bot.user.id;
     }
 
-    message.channel.sendFile('https://dbw-widget.glitch.me/dbl/frame/' + id + '/widget.png');
+    message.channel.sendFile('https://dbw-widget.glitch.me/dbw/frame/' + id + '/widget.png');
 }
 
 module.exports.help = {
-    name: 'dbl',
-    aliases: ['dblbot'],
-    usage: '{*}dbl <bot mention>',
-    type: 'basic',
+    name: 'dbw',
+    aliases: ['dbwbot'],
+    usage: '{*}dbw <bot mention>',
+    type: 'info=>bots',
     description: 'Get a DBW bot!'
 }
 
