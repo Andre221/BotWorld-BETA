@@ -15,7 +15,7 @@ module.exports.help = {
     name: 'bls',
     aliases: ['blsbot'],
     usage: '{*}bls <bot mention>',
-    type: 'info=>bots',
+    type: ['info','bots'],
     description: 'Get a BLS bot!'
 }
 

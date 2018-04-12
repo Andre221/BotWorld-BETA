@@ -13,7 +13,7 @@ module.exports.help = {
     name: 'baltop',
     aliases: ['balancetop'],
     usage: '{*}baltop',
-    type: 'funny',
+    type: ['funny'],
     description: 'Get the guilds leaderboard of balances.'
 }
 

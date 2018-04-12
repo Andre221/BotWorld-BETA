@@ -16,7 +16,7 @@ module.exports.help = {
     name: 'dbw',
     aliases: ['dbwbot'],
     usage: '{*}dbw <bot mention>',
-    type: 'info=>bots',
+    type: ['info','bots'],
     description: 'Get a DBW bot!'
 }
 

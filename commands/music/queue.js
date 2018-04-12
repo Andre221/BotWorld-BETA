@@ -53,6 +53,6 @@ module.exports.help = {
     name: 'queue',
     aliases: [],
     usage: '{*}queue <link>',
-    type: 'music',
+    type: ['music'],
     description: 'Queue a song.'
 }

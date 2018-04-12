@@ -17,6 +17,6 @@ module.exports.help = {
     name: 'pull',
     aliases: ['p'],
     usage: '{*}pull',
-    type: 'owner',
+    type: ['owner'],
     description: 'Pull from origin/master.'
 }

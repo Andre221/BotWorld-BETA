@@ -12,7 +12,7 @@ module.exports.help = {
     name: 'ping',
     aliases: ['pong'],
     usage: '{*}ping',
-    type: 'basic',
+    type: ['basic'],
     description: 'Check how many miliseconds the bot takes to respond.'
 }
 

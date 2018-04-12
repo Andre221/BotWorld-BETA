@@ -24,6 +24,6 @@ module.exports.help = {
     name: 'bal',
     aliases: ['balance', 'money'],
     usage: '{*}balance <Mention (optional)>',
-    type: 'economy',
+    type: ['economy'],
     description: 'Check a users balance.'
 }

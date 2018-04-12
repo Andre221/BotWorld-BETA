@@ -123,6 +123,6 @@ module.exports.help = {
     name: 'eval',
     aliases: ['evaluate'],
     usage: '{*}eval <Code>',
-    type: 'owner',
+    type: ['owner'],
     description: 'Evaluate code'
 }

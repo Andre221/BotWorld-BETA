@@ -14,6 +14,6 @@ module.exports.help = {
     name: 'pause',
     aliases: [],
     usage: '{*}pause',
-    type: 'music',
+    type: ['music'],
     description: 'Pause a song.'
 }

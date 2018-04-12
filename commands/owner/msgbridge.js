@@ -13,6 +13,6 @@ module.exports.help = {
     name: 'bridge',
     aliases: ['msgbridge'],
     usage: '{*}bridge <channel id>',
-    type: 'owner',
+    type: ['owner'],
     description: 'Connect 2 channels.'
 }

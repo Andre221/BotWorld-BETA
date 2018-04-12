@@ -14,6 +14,6 @@ module.exports.help = {
     name: 'resume',
     aliases: [],
     usage: '{*}resume',
-    type: 'music',
+    type: ['music'],
     description: 'Resumes a song.'
 }

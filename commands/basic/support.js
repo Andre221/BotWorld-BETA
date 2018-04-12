@@ -14,7 +14,7 @@ module.exports.help = {
     name: 'support',
     aliases: ['server'],
     usage: '{*}support',
-    type: 'basic',
+    type: ['basic'],
     description: 'Get a link to my support server.'
 }
 

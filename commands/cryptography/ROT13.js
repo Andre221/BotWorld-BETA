@@ -19,7 +19,7 @@ module.exports.help = {
     name: 'rot13',
     aliases: ['ebg13'],
     usage: '{*}rot13 <encode|decode> <text>',
-    type: 'cryptography',
+    type: ['cryptography'],
     description: 'Encode/Decode ROT13'
 }
 

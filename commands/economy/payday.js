@@ -23,6 +23,6 @@ module.exports.help = {
     name: 'payday',
     aliases: ['pd'],
     usage: '{*}payday',
-    type: 'economy',
+    type: ['economy'],
     description: 'Get 500 coins every 5 minutes.'
 }

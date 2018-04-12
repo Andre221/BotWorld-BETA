@@ -12,7 +12,7 @@ module.exports.help = {
     name: 'stats',
     aliases: ['info'],
     usage: '{*}stats',
-    type: 'basic',
+    type: ['basic'],
     description: 'Get where you can check my stats **LIVE**.'
 }
 

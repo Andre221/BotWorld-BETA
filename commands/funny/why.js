@@ -25,7 +25,7 @@ module.exports.help = {
     name: 'why',
     aliases: ['?'],
     usage: '{*}why',
-    type: 'funny',
+    type: ['funny'],
     description: 'Why???'
 }
 

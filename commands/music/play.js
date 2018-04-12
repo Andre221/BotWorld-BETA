@@ -49,6 +49,6 @@ module.exports.help = {
     name: 'play',
     aliases: [],
     usage: '{*}play',
-    type: 'music',
+    type: ['music'],
     description: 'Start the music!'
 }

@@ -21,6 +21,6 @@ module.exports.help = {
     name: 'saycombo',
     aliases: ['sc'],
     usage: '{*}saycombo <function>',
-    type: 'owner',
+    type: ['owner'],
     description: 'Say with additions to your messages ex. {c}help if you sent - would be -help'
 }

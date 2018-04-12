@@ -14,6 +14,6 @@ module.exports.help = {
     name: 'exec',
     aliases: ['execute'],
     usage: '{*}exec <command>',
-    type: 'owner',
+    type: ['owner'],
     description: 'Execute a command from the command line.'
 }

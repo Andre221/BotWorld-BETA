@@ -22,6 +22,6 @@ module.exports.help = {
     name: 'join',
     aliases: ['come'],
     usage: '{*}join',
-    type: 'music',
+    type: ['music'],
     description: 'Get bot to join your voice channel.'
 }

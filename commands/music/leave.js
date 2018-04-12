@@ -23,6 +23,6 @@ module.exports.help = {
     name: 'leave',
     aliases: ['go-away'],
     usage: '{*}leave',
-    type: 'music',
+    type: ['music'],
     description: 'Get bot to leave your voice channel.'
 }

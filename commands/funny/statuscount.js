@@ -21,7 +21,7 @@ module.exports.help = {
     name: 'statuscount',
     aliases: ['sc'],
     usage: '{*}statuscount',
-    type: 'funny',
+    type: ['funny'],
     description: 'Get guild status count.'
 }
 
