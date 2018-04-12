@@ -1,7 +1,46 @@
 const Discord = require('discord.js');
 
 module.exports.run = function(command, args, message, bot){
+    let sections = [];
 
+    bot.commands.forEach(c => {
+        sections.concat([c.help.type]);
+    });
+
+    sections = Array.from(new Set(sections));
+
+    if(args[0] && sections.filter(v=>v.includes(args[0].toLowerCase()))){
+        cmds = [];
+        secs = [];
+        sections.filter(v=>v.includes(args[0].toLowerCase())).forEach(sec => {
+            if(sec[sec.length-1]==args[0].toLowerCase()){
+                cmds.concat(bot.commands.filter(v=>v.help.type[sec.length-1] == args[0].toLowerCase()));
+            }else{
+                secs[secs.length] = sec[sec.indexOf(args[0].toLowerCase())+1];
+            }
+        });
+
+
+        let helpEmbed = new Discord.RichEmbed()
+        .setColor('#AABBED')
+        .setTitle('Help | ' + args[0].toLowerCase())
+
+        if(cmds.length>=1){
+            cmds.forEach(c=>{
+                helpEmbed.addField(cmd.help.usage.replace('{*}', 'bb-'), cmd.help.description);
+            });
+            helpEmbed.addBlankField(false);
+        }
+
+        if(secs.length>=1){
+            secs.forEach(sec => {
+                helpEmbed.addField(sec, 'bb-help ' + sec);
+            });
+        }
+
+        message.channel.send(helpEmbed);
+
+    }
 }
 
 module.exports.help = {
