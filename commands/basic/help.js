@@ -4,7 +4,7 @@ module.exports.run = function(command, args, message, bot){
     let sections = [];
     bot.commands.forEach(cmd => {
         cmd.help.type.split('=>').forEach(v=>{
-            if(!sections.includes(v)) sections[sections.length] = v;
+            if(!sections.includes(v) && cmd.help.type.split('=>').length>1) sections[sections.length] = v;
         });
     });
 
