@@ -8,6 +8,7 @@ module.exports.run = function(command, args, message, bot){
     });
 
     sections = Array.from(new Set(sections));
+    message.channel.send(JSON.stringify(sections, null, 2));
 
     if(args[0] && sections.filter(v=>v.includes(args[0].toLowerCase()))){
         cmds = [];
