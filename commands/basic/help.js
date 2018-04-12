@@ -4,7 +4,7 @@ module.exports.run = function(command, args, message, bot){
     let sections = [];
 
     bot.commands.forEach(c => {
-        if(!sections.includes(c.help.type)) sections = sections.concat(c.help.type);
+        if(!sections.includes(c.help.type)) sections[sections.length] = c.help.type;
     });
     message.channel.send(JSON.stringify(sections, null, 2));
 
