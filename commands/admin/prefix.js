@@ -24,7 +24,7 @@ module.exports.help = {
     name: 'prefix',
     aliases: ['pre'],
     usage: '{*}prefix <get | set>',
-    type: 'basic',
+    type: ['basic'],
     description: 'Get or set the bots prefix!'
 }
 

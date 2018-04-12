@@ -22,7 +22,7 @@ module.exports.help = {
     name: 'clean',
     aliases: [],
     usage: '{*}clean',
-    type: 'basic',
+    type: ['basic'],
     description: 'Delete the bots responses in the last 100 messages.'
 }
 
