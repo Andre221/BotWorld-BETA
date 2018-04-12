@@ -3,9 +3,9 @@ const Discord = require('discord.js');
 module.exports.run = function(command, args, message, bot){
     let sections = [];
     bot.commands.forEach(cmd => {
-        if(!sections.includes(cmd.help.type.split('=>')[0])){
-            sections.concat(cmd.help.type.split('=>'));
-        }
+        cmd.help.type.split('=>').forEach(v=>{
+            if(!sections.includes(v)) sections[sections.length] = v;
+        });
     });
 
     if(args[0] && sections.includes(args[0].toLowerCase())){
