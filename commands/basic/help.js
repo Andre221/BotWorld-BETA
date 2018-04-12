@@ -30,7 +30,7 @@ module.exports.run = function(command, args, message, bot){
             let subs = [];
             bot.commands.forEach(cmd => {
                 if(cmd.help.type.split('=>')[0] == args[0].toLowerCase() && cmd.help.type.split('=>').length >1){
-                    if(!subs.includes(cmd.help.type.split('=>')[1])) subs[subs.length] = cmd.help.type.split('=>')[1];
+                    if(!subs.includes(cmd.help.type.split('=>')[0])) subs[subs.length] = cmd.help.type.split('=>')[0];
                 }
             });
 
@@ -38,9 +38,18 @@ module.exports.run = function(command, args, message, bot){
             .setColor('#AABBED')
             .setTitle('Help | Sections of ' + args[0].toLowerCase())
             .setDescription('List of sections:');
-            subs.forEach(section => {
-                helpEmbed.addField(section, 'bb-help ' + section);
-            });
+            if(subs.length>=1){
+                subs.forEach(section => {
+                    helpEmbed.addField(section, 'bb-help ' + section);
+                });
+            }else{
+                subs = [];
+                bot.commands.forEach(cmd => {
+                    if(cmd.help.type.split('=>')[1] == args[0].toLowerCase() && cmd.help.type.split('=>').length >1){
+                        if(!subs.includes(cmd.help.type.split('=>')[1])) subs[subs.length] = cmd.help.type.split('=>')[1];
+                    }
+                });
+            }
             message.channel.send(helpEmbed);
         }
     }else{
