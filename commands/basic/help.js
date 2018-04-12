@@ -49,7 +49,9 @@ module.exports.run = function(command, args, message, bot){
 
         Array.from(new Set(sections.map(v=>v[0]))).forEach(s=>{
             helpEmbed.addField(s, 'bb-help ' + s);
-        })
+        });
+
+        message.channel.send(helpEmbed);
     }
 }
 
