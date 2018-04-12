@@ -12,7 +12,7 @@ module.exports.run = function(command, args, message, bot){
         secs = [];
         sections.filter(v=>v.includes(args[0].toLowerCase())).forEach(sec => {
             if(sec[sec.length-1]==args[0].toLowerCase()){
-                cmds = cmds.concat(bot.commands.filter(v=>v.help.type[sec.length-1] == args[0].toLowerCase()));
+                cmds = cmds.concat(bot.commands.filter(v=>v.help.type==sec).map(v=>v.help));
             }else{
                 secs[secs.length] = sec[sec.indexOf(args[0].toLowerCase())+1];
             }
