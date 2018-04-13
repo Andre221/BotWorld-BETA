@@ -22,7 +22,7 @@ module.exports.run = function (command, args, message, bot) {
         message.awaitNext({q: body.results[0], a:answers}, message.channel.id, (msg,s) => {
             if(Number(msg.content)==msg.content){
                 if([1,2,3,4].includes(Number(msg.content))){
-                    if(a[Number(msg.content)-1]==s.q.correct_answer){
+                    if(s.a[Number(msg.content)-1]==s.q.correct_answer){
                         let embed = new Discord.RichEmbed()
                         .setColor('#197F00')
                         .setTitle('Correct!')
