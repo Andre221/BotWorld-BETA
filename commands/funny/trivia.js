@@ -16,8 +16,8 @@ module.exports.run = function (command, args, message, bot) {
         }
         let start = new Discord.RichEmbed()
         .setColor('#AABBED')
-        .setTitle(q.category + ':')
-        .setDescription(`**${q.question}**\n${aText}`)
+        .setTitle(body.results[0].category + ':')
+        .setDescription(`**${body.results[0].question}**\n${aText}`)
         message.channel.send(start);
         message.awaitNext({q: body.results[0], a:answers}, message.channel.id, (msg,s) => {
             if(Number(message.content)==message.content){
