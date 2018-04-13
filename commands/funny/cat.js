@@ -1,5 +1,7 @@
 const Discord = require('discord.js');
 const https = require('https');
+const request = require('request');
+
 
 module.exports.run = function (command, args, message, bot) {
     request.get('http://thecatapi.com/api/images/get?format=xml&results_per_page=1', (error, response, body) => {
