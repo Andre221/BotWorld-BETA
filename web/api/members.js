@@ -5,13 +5,15 @@ const Discord = require('discord.js');
 const economy = require('../../plugins/economy.js');
 
 
-let client = new Discord.Client();
+// let client = new Discord.Client();
 
-client.on('ready', () => {
-    console.log('member api up');
-});
+// client.on('ready', () => {
+//     console.log('member api up');
+// });
 
-client.login(process.env.TOKEN);
+// client.login(process.env.TOKEN);
+
+let client = process.env.bot;
 
 let router = express.Router();
 

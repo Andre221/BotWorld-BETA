@@ -31,4 +31,3 @@ module.exports.help = {
     type: ['funny'],
     description: 'Get a random cat.'
 }
-
