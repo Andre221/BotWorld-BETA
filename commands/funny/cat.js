@@ -2,22 +2,26 @@ const Discord = require('discord.js');
 const https = require('https');
 
 module.exports.run = function (command, args, message, bot) {
-    const http = require("http");
+    try{
+        const http = require("http");
 
-    const url =
-        'http://aws.random.cat/meow';
-
-    http.get(url, res => {
-        res.setEncoding("utf8");
-        let body = "";
-        res.on("data", data => {
-            body += data;
+        const url =
+            'http://aws.random.cat/meow';
+    
+        http.get(url, res => {
+            res.setEncoding("utf8");
+            let body = "";
+            res.on("data", data => {
+                body += data;
+            });
+            res.on("end", () => {
+                body = JSON.parse(body);
+                message.channel.sendFile(body.file);
+            });
         });
-        res.on("end", () => {
-            body = JSON.parse(body);
-            message.channel.sendFile(body.file);
-        });
-    });
+    }catch(err){
+        message.channel.send('API is down, AGAIN!');
+    }
 }
 
 module.exports.help = {
