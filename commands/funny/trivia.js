@@ -19,25 +19,25 @@ module.exports.run = function (command, args, message, bot) {
         .setTitle(q.category + ':')
         .setDescription(`**${q.question}**\n${aText}`)
         message.channel.send(start);
-        message.awaitNext({q: body.results[0], a:answers}, message.channel.id, (msg) => {
+        message.awaitNext({q: body.results[0], a:answers}, message.channel.id, (msg,s) => {
             if(Number(message.content)==message.content){
                 if([1,2,3,4].includes(Number(message.content))){
-                    if(a[Number(message.content)+1]==q.correct_answer){
+                    if(a[Number(msg.content)+1]==s.q.correct_answer){
                         let embed = new Discord.RichEmbed()
                         .setColor('#197F00')
                         .setTitle('Correct!')
-                        .setDescription('**' + a[Number(message.content)+1] + '** was the correct answer! Good job +$100!')
-                        .setFooter(q.question);
-                        message.channel.send(embed);
+                        .setDescription('**' + s.a[Number(msg.content)+1] + '** was the correct answer! Good job +$100!')
+                        .setFooter(s.q.question);
+                        msg.channel.send(embed);
                         economy.addBalance(msg.author.id, 100);
                         msg.end();
                     }else{
                         let embed = new Discord.RichEmbed()
                         .setColor('#7F0019')
                         .setTitle('Incorrect!')
-                        .setDescription('**' + a[Number(message.content)+1] + '** was the correct answer! Try again next time!')
-                        .setFooter(q.question);
-                        message.channel.send(embed);
+                        .setDescription('**' + s.a[Number(msg.content)+1] + '** was the correct answer! Try again next time!')
+                        .setFooter(s.q.question);
+                        msg.channel.send(embed);
                         msg.end();
                     }
                 }else{
@@ -45,14 +45,14 @@ module.exports.run = function (command, args, message, bot) {
                     .setColor('#7F0019')
                     .setTitle('Invalid answer!')
                     .setDescription('Your message must be a number between 1 and 4.');
-                    message.channel.send(embed);
+                    msg.channel.send(embed);
                 }
             }else{
                 let embed = new Discord.RichEmbed()
                 .setColor('#7F0019')
                 .setTitle('Invalid answer!')
                 .setDescription('Your message must be a number between 1 and 4.');
-                message.channel.send(embed);
+                msg.channel.send(embed);
             }
         }, true);
     });
