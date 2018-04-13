@@ -2,6 +2,7 @@ const Discord = require('discord.js');
 const https = require('https');
 
 const economy = require('../../plugins/economy.js');
+const request = require('request');
 
 var shuffle = a => a.length ? a.splice(~~(Math.random()*a.length),1).concat(shuffle(a)): a;
 
