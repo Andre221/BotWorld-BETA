@@ -26,7 +26,7 @@ module.exports.run = function (command, args, message, bot) {
                         let embed = new Discord.RichEmbed()
                         .setColor('#197F00')
                         .setTitle('Correct!')
-                        .setDescription('**' + s.a[Number(msg.content)+1] + '** was the correct answer! Good job +$100!')
+                        .setDescription('**' + s.q.correct_answer + '** was the correct answer! Good job +$100!')
                         .setFooter(s.q.question);
                         msg.channel.send(embed);
                         economy.addBalance(msg.author.id, 100);
@@ -35,7 +35,7 @@ module.exports.run = function (command, args, message, bot) {
                         let embed = new Discord.RichEmbed()
                         .setColor('#7F0019')
                         .setTitle('Incorrect!')
-                        .setDescription('**' + s.a[Number(msg.content)+1] + '** was the correct answer! Try again next time!')
+                        .setDescription('**' + s.q.correct_answer + '** was the correct answer! Try again next time!')
                         .setFooter(s.q.question);
                         msg.channel.send(embed);
                         msg.end();
