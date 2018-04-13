@@ -2,24 +2,14 @@ const Discord = require('discord.js');
 const https = require('https');
 
 module.exports.run = function (command, args, message, bot) {
-    const http = require("http");
-
-    const url =
-        'http://aws.random.cat/meow';
-
-    http.get(url, res => {
-        res.setEncoding("utf8");
-        let body = "";
-        res.on("data", data => {
-            body += data;
-        });
-        res.on("end", () => {
-            try {
-                body = JSON.parse(body);
-                message.channel.sendFile(body.file);
-            } catch (err) {
-                message.channel.send('API is down, AGAIN!');
-            }
+    request.get('http://thecatapi.com/api/images/get?format=xml&results_per_page=1', (error, response, body) => {
+        var parseString = require('xml2js').parseString;
+        parseString(body, function (err, result) {
+            let cat = new Discord.RichEmbed()
+            .setColor('#AABBED')
+            .setDescrition('Meow! :cat:')
+            .setImage(result.response.data[0].images[0].image[0].url[0]);
+            message.channel.send(cat);
         });
     });
 }
