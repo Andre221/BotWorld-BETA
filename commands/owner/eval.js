@@ -25,7 +25,7 @@ function haste(code, lang = ''){
         request(
             {
                 method: "POST",
-                url: 'https://hastebin.com/documents',
+                url: 'https://code.larkin.space/documents',
                 body: code
             },
             function (err, res, data) {
