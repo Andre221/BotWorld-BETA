@@ -9,7 +9,7 @@ module.exports.run = function (command, args, message, bot) {
         parseString(body, function (err, result) {
             let cat = new Discord.RichEmbed()
             .setColor('#AABBED')
-            .setDescrition('Meow! :cat:')
+            .setDescription('Meow! :cat:')
             .setImage(result.response.data[0].images[0].image[0].url[0]);
             message.channel.send(cat);
         });

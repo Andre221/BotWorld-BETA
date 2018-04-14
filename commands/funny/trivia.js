@@ -6,10 +6,15 @@ const request = require('request');
 
 var shuffle = a => a.length ? a.splice(~~(Math.random()*a.length),1).concat(shuffle(a)): a;
 
+function decode(str){
+    return str.replaceAll('&quot;', '"').replaceAll('&#039;', "'");
+}
+
 module.exports.run = function (command, args, message, bot) {
     request.get('https://opentdb.com/api.php?amount=1&type=multiple', (error, response, body) => {
         body = JSON.parse(body);
-        let answers = body.results[0].incorrect_answers.concat([body.results[0].correct_answer]);
+        body.results[0].question = decode(body.results[0].question);
+        let answers = body.results[0].incorrect_answers.map(v=>decode(v)).concat([decode(body.results[0].correct_answer)]);
         let aText = '';
         for(var i=0;i<answers.length;i++){
             aText+= i+1 + '. ' + answers[i] + '\n'
