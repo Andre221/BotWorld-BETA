@@ -14,7 +14,7 @@ module.exports.run = function (command, args, message, bot) {
     request.get('https://opentdb.com/api.php?amount=1&type=multiple', (error, response, body) => {
         body = JSON.parse(body);
         body.results[0].question = decode(body.results[0].question);
-        let answers = body.results[0].incorrect_answers.map(v=>decode(v)).concat([decode(body.results[0].correct_answer)]);
+        let answers = shuffle(body.results[0].incorrect_answers.map(v=>decode(v)).concat([decode(body.results[0].correct_answer)]));
         let aText = '';
         for(var i=0;i<answers.length;i++){
             aText+= i+1 + '. ' + answers[i] + '\n'
