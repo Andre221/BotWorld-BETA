@@ -7,7 +7,7 @@ module.exports.run = function (command, args, message, bot) {
         if (!sections.includes(c.help.type)) sections[sections.length] = c.help.type;
     });
 
-    if (args[0] && sections.filter(v => v.includes(args[0].toLowerCase()))) {
+    if (args[0] && sections.filter(v => v.includes(args[0].toLowerCase())).size>=1) {
         cmds = [];
         secs = [];
         sections.filter(v => v.includes(args[0].toLowerCase())).forEach(sec => {
@@ -24,18 +24,6 @@ module.exports.run = function (command, args, message, bot) {
         let helpEmbed = new Discord.RichEmbed()
             .setColor('#AABBED')
             .setTitle('Help | ' + args[0].toLowerCase())
-
-        if (cmds.length == 0 && secs.length == 0) {
-            let helpEmbed = new Discord.RichEmbed()
-                .setColor('#AABBED')
-                .setTitle('Help');
-
-            Array.from(new Set(sections.map(v => v[0]))).forEach(s => {
-                helpEmbed.addField(s, 'bb-help ' + s);
-            });
-
-            return message.channel.send(helpEmbed);
-        } else {
             if (cmds.length >= 1) {
                 Array.from(new Set(cmds)).forEach(c => {
                     helpEmbed.addField(c.usage.replace('{*}', 'bb-'), c.description);
@@ -51,8 +39,17 @@ module.exports.run = function (command, args, message, bot) {
                 });
             }
             message.channel.send(helpEmbed);
-        }
 
+    }else{
+        let helpEmbed = new Discord.RichEmbed()
+        .setColor('#AABBED')
+        .setTitle('Help');
+
+    Array.from(new Set(sections.map(v => v[0]))).forEach(s => {
+        helpEmbed.addField(s, 'bb-help ' + s);
+    });
+
+    return message.channel.send(helpEmbed);
     }
 }
 
