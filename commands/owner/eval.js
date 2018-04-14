@@ -30,7 +30,7 @@ function haste(code, lang = ''){
             },
             function (err, res, data) {
                 data = JSON.parse(data);
-                return resolve(`https://hastebin.com/${data.key}${lang && `.${lang}`}`);
+                return resolve(`https://code.larkin.space/${data.key}${lang && `.${lang}`}`);
             }
         );
     });
