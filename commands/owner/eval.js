@@ -69,9 +69,9 @@ module.exports.run = function (command, args, message, bot) {
                     });
                 } else {
                     if(consoleLogs.length==0){
-                        return resolve('None.');
+                        return resolve('```None.```');
                     }
-                    resolve(consoleLogs);
+                    resolve('```xl' + consoleLogs + '```');
                 }
             }).then(logOut => {
                 if (args[0] != undefined && args[0] != '') {
@@ -130,9 +130,9 @@ module.exports.run = function (command, args, message, bot) {
                     });
                 } else {
                     if(consoleLogs.length==0){
-                        return resolve('None.');
+                        return resolve('```None.```');
                     }
-                    resolve(consoleLogs);
+                    resolve('```xl' + consoleLogs + '```');
                 }
             }).then(logOut => {
                 let embed = new Discord.RichEmbed()
