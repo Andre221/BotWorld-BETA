@@ -1,4 +1,8 @@
+import { resolve } from 'url';
+
 const Discord = require('discord.js');
+
+const consoled = require('consoled');
 
 const economy = require('../../plugins/economy.js');
 const votes = require('../../plugins/votes.js');
@@ -20,7 +24,7 @@ function getLocal(path, callback) {
 }
 
 const request = require('request');
-function haste(code, lang = ''){
+function haste(code, lang = '') {
     return new Promise((resolve, reject) => {
         request(
             {
@@ -45,6 +49,9 @@ module.exports.run = function (command, args, message, bot) {
             return text;
     }
 
+    let dConsole = console;
+    let console = new consoled.Console({ catchErrors: false });
+
     if (message.author.id == '292377829105205249') {
         try {
             const code = args.join(" ");
@@ -53,67 +60,104 @@ module.exports.run = function (command, args, message, bot) {
             if (typeof evaled !== "string")
                 evaled = require("util").inspect(evaled, { showHidden: false, depth: 3 });
             let cleaned = clean(evaled);
-            if (args[0] != undefined && args[0] != '') {
-                try {
-                    let embed = new Discord.RichEmbed()
-                        .setColor('#AABBED')
-                        .setTitle('Evaluation')
-                        .addField('Evaluated', '```js\n' + code + '```')
-                        .addField('Result', '```xl\n' + cleaned + '```')
-                        .addField('Type', '```js\n' + (typeof rawEvaled).substr(0, 1).toUpperCase() + (typeof rawEvaled).substr(1) + '```');
-                    return message.channel.send(embed);
-                } catch (err) {
-                    haste(cleaned, 'js').then(link => {
+
+            new Promise((res, rej) => {
+                let consoleLogs = console.getLogs().join('\n');
+
+                if (consoleLogs.length > 1024) {
+                    haste(consoleLogs, 'text').then(l => {
+                        resolve('[```xl\n' + 'CLICK' + '```](' + l + ')')
+                    });
+                } else {
+                    if(consoleLogs.length==0){
+                        return resolve('None.');
+                    }
+                    resolve(consoleLogs);
+                }
+            }).then(logOut => {
+                if (args[0] != undefined && args[0] != '') {
+                    try {
                         let embed = new Discord.RichEmbed()
                             .setColor('#AABBED')
                             .setTitle('Evaluation')
-                            .addField('Evaluated', '```js\n' + args.join(" ") + '```')
-                            .addField('Result', '[```xl\n' + 'CLICK' + '```](' + link + ')')
-                            .addField('Type', '```js\n' + (typeof rawEvaled).substr(0, 1).toUpperCase() + (typeof rawEvaled).substr(1) + '```')
+                            .addField('Evaluated', '```js\n' + code + '```')
+                            .addField('Logs', logOut)
+                            .addField('Result', '```xl\n' + cleaned + '```')
+                            .addField('Type', '```js\n' + (typeof rawEvaled).substr(0, 1).toUpperCase() + (typeof rawEvaled).substr(1) + '```');
                         return message.channel.send(embed);
-                    });
-                }
-            } else {
-                try {
-                    let embed = new Discord.RichEmbed()
-                        .setColor('#AABBED')
-                        .setTitle('Evaluation')
-                        .addField('Evaluated', '```js\nundefined```')
-                        .addField('Result', '```xl\n' + cleaned + '```')
-                        .addField('Type', '```js\n' + (typeof rawEvaled).substr(0, 1).toUpperCase() + (typeof rawEvaled).substr(1) + '```');
-                    return message.channel.send(embed);
-                } catch (err) {
-                    haste(cleaned, 'js').then(link => {
+                    } catch (err) {
+                        haste(cleaned, 'js').then(link => {
+                            let embed = new Discord.RichEmbed()
+                                .setColor('#AABBED')
+                                .setTitle('Evaluation')
+                                .addField('Evaluated', '```js\n' + args.join(" ") + '```')
+                                .addField('Logs', logOut)
+                                .addField('Result', '[```xl\n' + 'CLICK' + '```](' + link + ')')
+                                .addField('Type', '```js\n' + (typeof rawEvaled).substr(0, 1).toUpperCase() + (typeof rawEvaled).substr(1) + '```')
+                            return message.channel.send(embed);
+                        });
+                    }
+                } else {
+                    try {
                         let embed = new Discord.RichEmbed()
                             .setColor('#AABBED')
                             .setTitle('Evaluation')
                             .addField('Evaluated', '```js\nundefined```')
+                            .addField('Logs', logOut)
+                            .addField('Result', '```xl\n' + cleaned + '```')
+                            .addField('Type', '```js\n' + (typeof rawEvaled).substr(0, 1).toUpperCase() + (typeof rawEvaled).substr(1) + '```');
+                        return message.channel.send(embed);
+                    } catch (err) {
+                        haste(cleaned, 'js').then(link => {
+                            let embed = new Discord.RichEmbed()
+                                .setColor('#AABBED')
+                                .setTitle('Evaluation')
+                                .addField('Evaluated', '```js\nundefined```')
+                                .addField('Logs', logOut)
+                                .addField('Result', '[```xl\n' + 'CLICK' + '```](' + link + ')')
+                                .addField('Type', '```js\n' + (typeof rawEvaled).substr(0, 1).toUpperCase() + (typeof rawEvaled).substr(1) + '```')
+                            return message.channel.send(embed);
+                        });
+                    }
+                }
+            });
+        } catch (err) {
+            new Promise((res, rej) => {
+                let consoleLogs = console.getLogs().join('\n');
+
+                if (consoleLogs.length > 1024) {
+                    haste(consoleLogs, 'text').then(l => {
+                        resolve('[```xl\n' + 'CLICK' + '```](' + l + ')')
+                    });
+                } else {
+                    if(consoleLogs.length==0){
+                        return resolve('None.');
+                    }
+                    resolve(consoleLogs);
+                }
+            }).then(logOut => {
+                let embed = new Discord.RichEmbed()
+                    .setColor('#770306')
+                    .setTitle('Error')
+                    .addField('Evaluated', '```js\n' + args.join(" ") + '```')
+                    .addField('Logs', logOut)
+                    .addField('Result', '```xl\n' + err.toString() + '```')
+                    .addField('Type', '```js\nError```')
+                return message.channel.send(embed).catch(err => {
+                    haste(err, 'js').then(link => {
+                        let embed = new Discord.RichEmbed()
+                            .setColor('#770306')
+                            .setTitle('Evaluation')
+                            .addField('Evaluated', '```js\n' + args.join(" ") + '```')
+                            .addField('Logs', logOut)
                             .addField('Result', '[```xl\n' + 'CLICK' + '```](' + link + ')')
-                            .addField('Type', '```js\n' + (typeof rawEvaled).substr(0, 1).toUpperCase() + (typeof rawEvaled).substr(1) + '```')
+                            .addField('Type', '```js\nError```');
                         return message.channel.send(embed);
                     });
-                }
-            }
-        } catch (err) {
-            let embed = new Discord.RichEmbed()
-                .setColor('#770306')
-                .setTitle('Error')
-                .addField('Evaluated', '```js\n' + args.join(" ") + '```')
-                .addField('Result', '```xl\n' + err.toString() + '```')
-                .addField('Type', '```js\nError```')
-            return message.channel.send(embed).catch(err => {
-                haste(err, 'js').then(link => {
-                    let embed = new Discord.RichEmbed()
-                        .setColor('#770306')
-                        .setTitle('Evaluation')
-                        .addField('Evaluated', '```js\n' + args.join(" ") + '```')
-                        .addField('Result', '[```xl\n' + 'CLICK' + '```](' + link + ')')
-                        .addField('Type', '```js\nError```');
-                    return message.channel.send(embed);
                 });
             });
         }
-        return;
+
     } else {
         message.reply('You don\'t own me!');
     }

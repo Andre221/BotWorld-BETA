@@ -10,25 +10,22 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "colors": "^1.2.1",
+    "body-parser": "^1.8.1",
     "discord-botworld-api": "^1.1.2",
     "discord.js": "^11.3.2",
+    "discordjs-embed-converter": "^1.2.2",
     "ejs": "^2.5.8",
     "express": "^4.16.3",
     "ffmpeg": "0.0.4",
     "ffmpeg-binaries": "^3.2.2-3",
-    "hastebin-generator": "^1.1.4",
     "jimp": "^0.2.28",
+    "lowdb": "^1.0.0",
     "ms": "^2.1.1",
     "opus": "0.0.0",
     "opusscript": "0.0.6",
-    "vhost": "^3.0.2",
+    "replypages-discordjs": "^1.1.6",
     "youtube-search": "^1.1.0",
     "ytdl-core": "^0.20.2",
-    "canvas": "^1.6.10",
-    "lowdb": "^1.0.0",
-    "discordjs-embed-converter": "^1.2.2",
-    "body-parser": "^1.8.1",
-    "programmatic-repl": "^1.1.4"
+    "consoled": "^1.2.2"
   }
 }
