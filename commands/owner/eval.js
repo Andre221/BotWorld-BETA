@@ -2,7 +2,7 @@ import { resolve } from 'url';
 
 const Discord = require('discord.js');
 
-const consoled = require('consoled');
+const consoledR = require('consoled');
 
 const economy = require('../../plugins/economy.js');
 const votes = require('../../plugins/votes.js');
@@ -49,8 +49,7 @@ module.exports.run = function (command, args, message, bot) {
             return text;
     }
 
-    let dConsole = console;
-    let console = new consoled.Console({ catchErrors: false });
+    let consoled = new consoledR.Console({ catchErrors: false });
 
     if (message.author.id == '292377829105205249') {
         try {
@@ -61,8 +60,8 @@ module.exports.run = function (command, args, message, bot) {
                 evaled = require("util").inspect(evaled, { showHidden: false, depth: 3 });
             let cleaned = clean(evaled);
 
-            new Promise((res, rej) => {
-                let consoleLogs = console.getLogs().join('\n');
+            new Promise((resolve, reject) => {
+                let consoleLogs = consoled.getLogs().join('\n');
 
                 if (consoleLogs.length > 1024) {
                     haste(consoleLogs, 'text').then(l => {
@@ -122,8 +121,8 @@ module.exports.run = function (command, args, message, bot) {
                 }
             });
         } catch (err) {
-            new Promise((res, rej) => {
-                let consoleLogs = console.getLogs().join('\n');
+            new Promise((resolve, reject) => {
+                let consoleLogs = consoled.getLogs().join('\n');
 
                 if (consoleLogs.length > 1024) {
                     haste(consoleLogs, 'text').then(l => {
