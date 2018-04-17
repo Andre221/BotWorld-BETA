@@ -140,10 +140,10 @@ module.exports.run = function (command, args, message, bot) {
                     .setTitle('Error')
                     .addField('Evaluated', '```js\n' + args.join(" ") + '```')
                     .addField('Logs', logOut)
-                    .addField('Result', '```xl\n' + err.toString() + '```')
+                    .addField('Result', '```xl\n' + err.stack + '```')
                     .addField('Type', '```js\nError```')
                 return message.channel.send(embed).catch(err => {
-                    haste(err, 'js').then(link => {
+                    haste(err.stack, 'js').then(link => {
                         let embed = new Discord.RichEmbed()
                             .setColor('#770306')
                             .setTitle('Evaluation')
