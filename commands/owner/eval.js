@@ -71,7 +71,7 @@ module.exports.run = function (command, args, message, bot) {
                     if(consoleLogs.length==0){
                         return resolve('```None.```');
                     }
-                    resolve('```xl' + consoleLogs + '```');
+                    resolve('```xl\n' + consoleLogs + '```');
                 }
             }).then(logOut => {
                 if (args[0] != undefined && args[0] != '') {
@@ -132,7 +132,7 @@ module.exports.run = function (command, args, message, bot) {
                     if(consoleLogs.length==0){
                         return resolve('```None.```');
                     }
-                    resolve('```xl' + consoleLogs + '```');
+                    resolve('```xl\n' + consoleLogs + '```');
                 }
             }).then(logOut => {
                 let embed = new Discord.RichEmbed()
