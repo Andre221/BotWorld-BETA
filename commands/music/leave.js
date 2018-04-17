@@ -9,6 +9,12 @@ module.exports.run = function(command, args, message, bot){
             .setColor('#AABBED')
             .setTitle('Left voice channel ' + vc.name + '!');
             message.channel.send(embed);
+        }else{
+            let embed = new Discord.RichEmbed()
+            .setColor('#AABBED')
+            .setTitle('Could not fullfil request!')
+            .setDescription('I must be in the same voice channel as you!');
+            message.channel.send(embed);
         }
     }else{
         let embed = new Discord.RichEmbed()

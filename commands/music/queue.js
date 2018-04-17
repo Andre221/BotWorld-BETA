@@ -52,7 +52,7 @@ module.exports.run = function (command, args, message, bot) {
 module.exports.help = {
     name: 'queue',
     aliases: [],
-    usage: '{*}queue <link>',
+    usage: '{*}queue <link or search>',
     type: ['music'],
     description: 'Queue a song.'
 }
