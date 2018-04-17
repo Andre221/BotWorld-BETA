@@ -27,7 +27,7 @@ module.exports.run = function(command, args, message, bot){
 
         if(cmds.length>=1){
             Array.from(new Set(cmds)).forEach(c=>{
-                helpEmbed.addField(c.usage.replace('{*}', 'b-'), c.description);
+                helpEmbed.addField(c.usage.replace('{*}', 'bb-'), c.description);
             });
             if(secs.length>=1){
                 helpEmbed.addBlankField(false);
@@ -36,7 +36,7 @@ module.exports.run = function(command, args, message, bot){
 
         if(secs.length>=1){
             Array.from(new Set(secs)).forEach(sec => {
-                helpEmbed.addField(sec, 'b-help ' + sec);
+                helpEmbed.addField(sec, 'bb-help ' + sec);
             });
         }
 
@@ -48,7 +48,7 @@ module.exports.run = function(command, args, message, bot){
         .setTitle('Help');
 
         Array.from(new Set(sections.map(v=>v[0]))).forEach(s=>{
-            helpEmbed.addField(s, 'b-help ' + s);
+            helpEmbed.addField(s, 'bb-help ' + s);
         });
 
         message.channel.send(helpEmbed);
