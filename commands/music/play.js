@@ -39,9 +39,32 @@ function play(bot, message, songs){
 
 module.exports.run = function(command, args, message, bot){
     if(!bot.music[message.guild.id] || !bot.music[message.guild.id].queue[0]){
-        
+        let embed = new Discord.RichEmbed()
+        .setColor('#AABBED')
+        .setTitle('The queue is empty!')
+        .setDescription('To play something you must first queue it using the queue command!')
+        message.channel.send(embed);
     }else{
-        play(bot, message, bot.music[message.guild.id].queue);
+        if(!message.guild.voiceConnection){
+            let vc = message.member.voiceChannel;
+            if(vc){
+                vc.join().then(voiceconnection =>{
+                    let embed = new Discord.RichEmbed()
+                    .setColor('#AABBED')
+                    .setTitle('Joined voice channel ' + vc.name + '!');
+                    message.channel.send(embed);
+                    play(bot, message, bot.music[message.guild.id].queue);
+                });
+            }else{
+                let embed = new Discord.RichEmbed()
+                .setColor('#AABBED')
+                .setTitle('Could not fullfil request!')
+                .setDescription('You must join a voice channel before executing this command!');
+                message.channel.send(embed);
+            }
+        }else{
+            play(bot, message, bot.music[message.guild.id].queue);
+        }
     }
 }
 

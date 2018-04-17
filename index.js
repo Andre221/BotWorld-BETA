@@ -246,7 +246,7 @@ Discord.Message.prototype.end = function () {
 }
 
 bot.on('message', (message) => {
-    if(!message.channel) return;
+    if (!message.channel) return;
     if (bot.awaiting[message.author.id]) {
         if (bot.awaiting[message.author.id].channel) {
             if (bot.awaiting[message.author.id].channel == message.channel.id) {
@@ -270,19 +270,19 @@ bot.on('message', (message) => {
 
 const msgEmbedToRich = require("discordjs-embed-converter");
 bot.on('message', (message) => {
-    if(!message.channel) return;
+    if (!message.channel) return;
     let bridge = bot.bridge;
-    if(message.author.id == '292377829105205249'){
-        if(message.content=='bridge.close()'){
+    if (message.author.id == '292377829105205249') {
+        if (message.content == 'bridge.close()') {
             bot.channels.get(bridge.from).send('Bridge closed!');
             bot.channels.get(bridge.to).send('Bridge closed!');
             bot.bridge = {};
         }
     }
-    if(message.author.id==bot.user.id) return;
+    if (message.author.id == bot.user.id) return;
     let bn;
-    if(message.author.bot) bn = '(BOT)';
-    if(!message.author.bot) bn = '(USER)';
+    if (message.author.bot) bn = '(BOT)';
+    if (!message.author.bot) bn = '(USER)';
     if (message.channel && bridge.to == message.channel.id) {
         bot.channels.get(bridge.from).send(message.author.tag + ' ' + bn + ': ' + message.content);
         if (message.attachments) {
@@ -290,19 +290,19 @@ bot.on('message', (message) => {
                 bot.channels.get(bridge.from).sendFile(file.url)
             });
         }
-        if(message.embeds){
+        if (message.embeds) {
             message.embeds.forEach(embed => {
                 bot.channels.get(bridge.from).send(msgEmbedToRich(embed));
             });
         }
     } else if (message.channel && bridge.from == message.channel.id) {
-        bot.channels.get(bridge.to).send(message.author.tag + ' ' + bn  + ': ' + message.content);
+        bot.channels.get(bridge.to).send(message.author.tag + ' ' + bn + ': ' + message.content);
         if (message.attachments) {
             message.attachments.forEach(file => {
                 bot.channels.get(bridge.to).sendFile(file.url)
             });
         }
-        if(message.embeds){
+        if (message.embeds) {
             message.embeds.forEach(embed => {
                 bot.channels.get(bridge.to).send(msgEmbedToRich(embed));
             });
