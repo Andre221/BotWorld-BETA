@@ -23,6 +23,10 @@ function getLocal(path, callback) {
     });
 }
 
+this['🎱'] = function(Question){
+    return 'yes? no? idk?';
+}
+
 const request = require('request');
 function haste(code, lang = '') {
     return new Promise((resolve, reject) => {
