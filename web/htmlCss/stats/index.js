@@ -7,16 +7,27 @@ function httpGet(theUrl, callback){
     xmlHttp.open("GET", theUrl, true); // true for asynchronous 
     xmlHttp.send(null);
 }
-setInterval(function(){
-    httpGet('/api/stats', data => {
-        data = JSON.parse(data);
-        document.getElementById('guild-count').innerHTML = 'Guild Count: ' + data.guildCount;
-        document.getElementById('user-count').innerHTML = 'User Count: ' + data.userCount;
-        document.getElementById('uptime').innerHTML = 'Uptime: ' + data.uptime;
-        document.getElementById('ping').innerHTML = 'Ping: ' + data.ping;
 
-        document.getElementById('message-user').innerHTML = 'User Messages: ' + data.messages.user;
-        document.getElementById('message-bot').innerHTML = 'Bot Messages: ' + data.messages.bot;
-        document.getElementById('message-self').innerHTML = 'Self Messages: ' + data.messages.self;
-    });
-}, 100);
+function msToTime(duration) {
+    var milliseconds = parseInt((duration%1000)/100)
+        , seconds = parseInt((duration/1000)%60)
+        , minutes = parseInt((duration/(1000*60))%60)
+        , hours = parseInt((duration/(1000*60*60))%24);
+
+    hours = (hours < 10) ? "0" + hours : hours;
+    minutes = (minutes < 10) ? "0" + minutes : minutes;
+    seconds = (seconds < 10) ? "0" + seconds : seconds;
+
+    return hours + "h:" + minutes + "m:" + seconds + "s:" + milliseconds + 'ms';
+}
+
+var start = Date.now();
+var botUptime = 0;
+httpGet('/api/stats', data => {
+    data = JSON.parse(data);
+    botUptime = data.uptime;
+});
+
+setInterval(() => {
+    document.getElementById('uptime').innerHTML = msToTime(botUptime + (Date.now() - start));
+}, 100)
